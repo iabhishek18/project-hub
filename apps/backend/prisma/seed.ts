@@ -29,6 +29,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/netflix-clone.zip',
       fileKey: 'projects/netflix-clone.zip',
       isFeatured: true,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ced95?w=600&h=400&fit=crop',
     },
     {
       title: 'AI Resume Builder with ATS Score Checker',
@@ -41,6 +42,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/ai-resume.zip',
       fileKey: 'projects/ai-resume.zip',
       isFeatured: true,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&h=400&fit=crop',
     },
     {
       title: 'WhatsApp Clone - Real-time Chat Application',
@@ -53,6 +55,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/whatsapp-clone.zip',
       fileKey: 'projects/whatsapp-clone.zip',
       isFeatured: true,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=600&h=400&fit=crop',
     },
     {
       title: 'Uber Clone - Ride Sharing Mobile App',
@@ -64,6 +67,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/uber-clone.zip',
       fileKey: 'projects/uber-clone.zip',
       isFeatured: true,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1449965408869-ebd3fee7bfbd?w=600&h=400&fit=crop',
     },
     {
       title: 'Stock Market Prediction using LSTM',
@@ -76,6 +80,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/stock-prediction.zip',
       fileKey: 'projects/stock-prediction.zip',
       isFeatured: false,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
     },
     {
       title: 'DeFi Yield Farming Platform',
@@ -87,6 +92,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/defi-platform.zip',
       fileKey: 'projects/defi-platform.zip',
       isFeatured: false,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop',
     },
     {
       title: 'Kubernetes Auto-Scaling CI/CD Pipeline',
@@ -98,6 +104,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/k8s-pipeline.zip',
       fileKey: 'projects/k8s-pipeline.zip',
       isFeatured: false,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=600&h=400&fit=crop',
     },
     {
       title: 'Multiplayer Battle Royale Game',
@@ -109,6 +116,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/battle-royale.zip',
       fileKey: 'projects/battle-royale.zip',
       isFeatured: true,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=400&fit=crop',
     },
     {
       title: 'Cloud-Native Microservices E-Commerce',
@@ -120,6 +128,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/microservices-ecom.zip',
       fileKey: 'projects/microservices-ecom.zip',
       isFeatured: false,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop',
     },
     {
       title: 'Penetration Testing Automation Suite',
@@ -131,6 +140,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/pentest-suite.zip',
       fileKey: 'projects/pentest-suite.zip',
       isFeatured: false,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop',
     },
     {
       title: 'Smart Agriculture IoT Monitoring System',
@@ -142,6 +152,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/smart-agri.zip',
       fileKey: 'projects/smart-agri.zip',
       isFeatured: false,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&h=400&fit=crop',
     },
     {
       title: 'TikTok Clone - Short Video Platform',
@@ -154,6 +165,103 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/tiktok-clone.zip',
       fileKey: 'projects/tiktok-clone.zip',
       isFeatured: true,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=600&h=400&fit=crop',
+    },
+    {
+      title: 'Spotify Clone - Music Streaming App',
+      description: 'Full-featured music streaming platform with playlists, recommendations, audio player, and artist dashboard.',
+      price: 5499,
+      category: ProjectCategory.WEB_DEVELOPMENT,
+      techStack: ['Next.js', 'Supabase', 'Stripe', 'Tailwind CSS', 'Howler.js', 'PostgreSQL'],
+      features: ['Audio streaming', 'Playlist management', 'Search & discovery', 'Artist profiles', 'Subscription billing', 'Mobile responsive', 'Offline mode', 'Social sharing'],
+      fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/spotify-clone.zip',
+      fileKey: 'projects/spotify-clone.zip',
+      isFeatured: true,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=600&h=400&fit=crop',
+    },
+    {
+      title: 'AI Image Generator - DALL-E & Stable Diffusion',
+      description: 'Text-to-image generation platform using multiple AI models with prompt engineering, gallery, and community features.',
+      price: 4499,
+      category: ProjectCategory.MACHINE_LEARNING,
+      techStack: ['Python', 'Flask', 'Stable Diffusion', 'OpenAI DALL-E', 'React', 'AWS Lambda', 'S3', 'Redis'],
+      features: ['Multi-model support', 'Prompt templates', 'Image gallery', 'Community sharing', 'Upscaling', 'Inpainting', 'Batch generation', 'API access'],
+      fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/ai-image-gen.zip',
+      fileKey: 'projects/ai-image-gen.zip',
+      isFeatured: true,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
+    },
+    {
+      title: 'Discord Bot - Moderation & Music',
+      description: 'Feature-rich Discord bot with auto-moderation, music playback, leveling system, and custom commands.',
+      price: 1499,
+      category: ProjectCategory.WEB_DEVELOPMENT,
+      techStack: ['Node.js', 'Discord.js', 'MongoDB', 'Redis', 'FFmpeg', 'Docker'],
+      features: ['Auto-moderation', 'Music playback', 'Leveling system', 'Custom commands', 'Welcome messages', 'Ticket system', 'Giveaways', 'Dashboard'],
+      fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/discord-bot.zip',
+      fileKey: 'projects/discord-bot.zip',
+      isFeatured: false,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1614680376408-81e91bbe261f?w=600&h=400&fit=crop',
+    },
+    {
+      title: 'Hospital Management System',
+      description: 'Complete HMS with patient records, appointment scheduling, billing, pharmacy, and lab management modules.',
+      price: 6999,
+      category: ProjectCategory.WEB_DEVELOPMENT,
+      techStack: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Redis', 'Socket.io', 'PDF Generation', 'Chart.js'],
+      features: ['Patient management', 'Appointment scheduling', 'Billing & invoicing', 'Pharmacy module', 'Lab reports', 'Staff management', 'Analytics dashboard', 'Email notifications'],
+      fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/hospital-mgmt.zip',
+      fileKey: 'projects/hospital-mgmt.zip',
+      isFeatured: false,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=600&h=400&fit=crop',
+    },
+    {
+      title: 'Crypto Portfolio Tracker',
+      description: 'Real-time cryptocurrency portfolio tracker with price alerts, DeFi integration, and tax reporting.',
+      price: 3499,
+      category: ProjectCategory.BLOCKCHAIN,
+      techStack: ['React', 'Node.js', 'CoinGecko API', 'Web3.js', 'PostgreSQL', 'Chart.js', 'Telegram Bot API'],
+      features: ['Real-time prices', 'Portfolio analytics', 'Price alerts', 'DeFi tracking', 'Tax reports', 'Multi-wallet support', 'Telegram notifications', 'Export to CSV'],
+      fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/crypto-tracker.zip',
+      fileKey: 'projects/crypto-tracker.zip',
+      isFeatured: false,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=600&h=400&fit=crop',
+    },
+    {
+      title: 'Learning Management System (LMS)',
+      description: 'Udemy-style LMS with video courses, quizzes, certificates, instructor dashboard, and payment processing.',
+      price: 5999,
+      category: ProjectCategory.WEB_DEVELOPMENT,
+      techStack: ['Next.js', 'Prisma', 'Mux Video', 'Stripe', 'Uploadthing', 'Tailwind CSS', 'PostgreSQL'],
+      features: ['Video hosting', 'Course creation', 'Quiz & assessments', 'Progress tracking', 'Certificates', 'Instructor earnings', 'Student dashboard', 'Discussion forums'],
+      fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/lms-platform.zip',
+      fileKey: 'projects/lms-platform.zip',
+      isFeatured: true,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=600&h=400&fit=crop',
+    },
+    {
+      title: 'Drone Delivery System',
+      description: 'Autonomous drone delivery management with route optimization, fleet tracking, and delivery scheduling.',
+      price: 8499,
+      category: ProjectCategory.IOT,
+      techStack: ['Python', 'ROS', 'React', 'Node.js', 'MongoDB', 'Google Maps', 'MQTT', 'TensorFlow'],
+      features: ['Route optimization', 'Fleet management', 'Live tracking', 'Delivery scheduling', 'Obstacle avoidance', 'Weather integration', 'Customer app', 'Admin dashboard'],
+      fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/drone-delivery.zip',
+      fileKey: 'projects/drone-delivery.zip',
+      isFeatured: false,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600&h=400&fit=crop',
+    },
+    {
+      title: 'Twitter/X Clone - Social Media Platform',
+      description: 'Full-featured social media platform with tweets, threads, spaces, bookmarks, and real-time notifications.',
+      price: 5999,
+      category: ProjectCategory.WEB_DEVELOPMENT,
+      techStack: ['Next.js 14', 'tRPC', 'Prisma', 'PostgreSQL', 'Redis', 'Pusher', 'Cloudinary', 'Tailwind CSS'],
+      features: ['Tweet & threads', 'Real-time feed', 'Spaces (audio rooms)', 'Bookmarks & lists', 'Direct messages', 'Notifications', 'Trending topics', 'Verified badges'],
+      fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/twitter-clone.zip',
+      fileKey: 'projects/twitter-clone.zip',
+      isFeatured: true,
+      thumbnailUrl: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=600&h=400&fit=crop',
     },
   ];
 
@@ -166,7 +274,7 @@ async function main() {
     });
   }
 
-  console.log('Seed data created successfully: 12 projects added');
+  console.log('Seed data created successfully: 20 projects added');
 }
 
 main()

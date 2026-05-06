@@ -10,8 +10,25 @@
     cursor: default;
   }
 
+  .light body,
+  html.light body {
+    @apply bg-white text-gray-900;
+  }
+
+  html.light {
+    --surface: #ffffff;
+    --surface-50: #f8fafc;
+    --surface-100: #f1f5f9;
+    --surface-200: #e2e8f0;
+    --surface-300: #cbd5e1;
+  }
+
   ::selection {
     @apply bg-accent-cyan/30 text-white;
+  }
+
+  html.light ::selection {
+    @apply bg-accent-blue/20 text-gray-900;
   }
 
   ::-webkit-scrollbar {
@@ -20,6 +37,10 @@
 
   ::-webkit-scrollbar-track {
     background: #050507;
+  }
+
+  html.light ::-webkit-scrollbar-track {
+    background: #f1f5f9;
   }
 
   ::-webkit-scrollbar-thumb {

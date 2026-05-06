@@ -6,6 +6,7 @@ import { UserRole } from '@project-hub/shared';
 import { Menu, X, LogOut, User } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export function Navbar() {
   const { user, isAuthenticated, isHydrated, logout } = useAuthStore();
@@ -22,7 +23,7 @@ export function Navbar() {
   const showAuth = isHydrated && isAuthenticated;
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-surface/90 backdrop-blur-xl shadow-[0_1px_0_rgba(0,245,212,0.1)]' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-surface/90 dark:bg-surface/90 backdrop-blur-xl shadow-sm dark:shadow-[0_1px_0_rgba(0,245,212,0.1)]' : 'bg-transparent'}`}>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <Link href="/" className="flex items-center gap-2 group">
@@ -41,6 +42,7 @@ export function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             {showAuth ? (
               <>
                 <Link href={dashboardLink} className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-300 hover:text-accent-cyan hover:bg-surface-100/50 transition-all">

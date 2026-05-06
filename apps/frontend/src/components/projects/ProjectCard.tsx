@@ -52,6 +52,7 @@ export function ProjectCard({
   price,
   category,
   techStack,
+  thumbnailUrl,
   averageRating,
   reviewCount,
 }: ProjectCardProps) {
@@ -60,10 +61,14 @@ export function ProjectCard({
   return (
     <motion.div whileHover={{ y: -8, scale: 1.02 }} transition={{ type: 'spring', stiffness: 400, damping: 25 }}>
       <Link href={`/projects/${id}`} className="block card-glow neon-border group relative">
-        <div className={`h-40 bg-gradient-to-br ${gradient} relative overflow-hidden flex items-center justify-center`}>
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-          <span className="text-white/90 font-display font-bold text-lg">{categoryLabels[category]}</span>
+        <div className={`h-44 ${thumbnailUrl ? '' : `bg-gradient-to-br ${gradient}`} relative overflow-hidden flex items-center justify-center`}>
+          {thumbnailUrl ? (
+            <img src={thumbnailUrl} alt={title} className="absolute inset-0 w-full h-full object-cover" />
+          ) : (
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+          <span className="absolute bottom-3 left-4 text-white/90 font-display font-semibold text-sm px-2 py-0.5 rounded-md bg-black/40 backdrop-blur-sm border border-white/10">{categoryLabels[category]}</span>
         </div>
 
         <div className="p-5">
@@ -85,8 +90,8 @@ export function ProjectCard({
             )}
           </div>
 
-          <div className="flex items-center justify-between mt-4 pt-3 border-t border-surface-300/30">
-            <span className="text-xl font-display font-bold gradient-text">
+          <div className="flex items-center justify-between mt-4 pt-3 border-t border-surface-300/30 dark:border-surface-300/30">
+            <span className="text-xl font-display font-bold bg-gradient-to-r from-neon-green via-accent-cyan to-neon-blue bg-clip-text text-transparent">
               ₹{Number(price).toLocaleString('en-IN')}
             </span>
             <div className="flex items-center gap-1 text-sm">

@@ -237,7 +237,7 @@ export default function ProjectDetailPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="glass p-6 sticky top-24">
-            <div className="text-4xl font-display font-bold gradient-text mb-6">
+            <div className="text-4xl font-display font-bold bg-gradient-to-r from-neon-green via-accent-cyan to-neon-blue bg-clip-text text-transparent mb-6">
               ₹{Number(project.price).toLocaleString('en-IN')}
             </div>
 
