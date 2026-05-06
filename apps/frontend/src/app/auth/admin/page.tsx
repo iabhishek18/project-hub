@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/auth.store';
 import { Shield } from 'lucide-react';
@@ -32,11 +32,11 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 pt-20">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
+      <div
+
+
+
+        className="w-full max-w-md animate-fade-in"
       >
         <div className="glass p-8">
           <div className="flex justify-center mb-4">
@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
             </button>
           </form>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

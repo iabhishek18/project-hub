@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/auth.store';
 import toast from 'react-hot-toast';
@@ -32,11 +32,11 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 pt-20">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
+      <div
+
+
+
+        className="w-full max-w-md animate-fade-in"
       >
         <div className="glass p-8">
           <h1 className="text-2xl font-display font-bold text-white text-center">Welcome Back</h1>
@@ -64,7 +64,7 @@ export default function LoginPage() {
             <Link href="/auth/admin" className="text-xs text-gray-600 hover:text-gray-400">Admin Login</Link>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/auth.store';
 import toast from 'react-hot-toast';
@@ -35,7 +35,7 @@ export default function RequestPage() {
 
   return (
     <div className="pt-20 max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+      <div className="animate-fade-in">
         <h1 className="text-3xl font-display font-bold text-white mb-2">Request <span className="gradient-text">Custom Project</span></h1>
         <p className="text-gray-400 mb-8">Describe your requirements and we&apos;ll build it for you.</p>
 
@@ -60,7 +60,7 @@ export default function RequestPage() {
             </button>
           </form>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

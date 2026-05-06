@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/auth.store';
 import { MessageSquare, Send } from 'lucide-react';
@@ -32,7 +32,7 @@ export default function ContactPage() {
 
   return (
     <div className="pt-20 max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+      <div className="animate-fade-in">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 mb-4">
             <MessageSquare className="h-7 w-7 text-accent-cyan" />
@@ -61,7 +61,7 @@ export default function ContactPage() {
         {!isAuthenticated && (
           <p className="text-center text-sm text-gray-600 mt-4">You&apos;ll need to log in before sending a message.</p>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 }

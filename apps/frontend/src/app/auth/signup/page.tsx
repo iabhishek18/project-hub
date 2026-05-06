@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+
 import { UserRole } from '@project-hub/shared';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/auth.store';
@@ -38,11 +38,11 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 pt-20">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
+      <div
+
+
+
+        className="w-full max-w-md animate-fade-in"
       >
         <div className="glass p-8">
           <h1 className="text-2xl font-display font-bold text-white text-center">Create Account</h1>
@@ -79,7 +79,7 @@ export default function SignupPage() {
             <Link href="/auth/login" className="text-accent-cyan hover:underline font-medium">Log in</Link>
           </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
