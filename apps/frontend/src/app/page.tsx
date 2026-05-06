@@ -21,9 +21,9 @@ const fadeUp = {
 };
 
 const featuredProjects = [
-  { title: 'Netflix Clone', tech: ['Next.js', 'Prisma', 'Stripe'], price: '₹4,999', gradient: 'from-red-500 to-rose-700', rating: 4.8 },
-  { title: 'AI Image Generator', tech: ['Python', 'Stable Diffusion', 'React'], price: '₹4,499', gradient: 'from-violet-500 to-purple-700', rating: 4.9 },
-  { title: 'Twitter/X Clone', tech: ['Next.js', 'tRPC', 'Pusher'], price: '₹5,999', gradient: 'from-sky-500 to-blue-700', rating: 4.7 },
+  { title: 'Netflix Clone', tech: ['Next.js', 'Prisma', 'Stripe'], price: '₹4,999', image: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ced95?w=600&h=400&fit=crop', rating: 4.8 },
+  { title: 'AI Image Generator', tech: ['Python', 'Stable Diffusion', 'React'], price: '₹4,499', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop', rating: 4.9 },
+  { title: 'Twitter/X Clone', tech: ['Next.js', 'tRPC', 'Pusher'], price: '₹5,999', image: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=600&h=400&fit=crop', rating: 4.7 },
 ];
 
 const categories = [
@@ -123,27 +123,46 @@ export default function HomePage() {
               <p className="text-gray-500 dark:text-gray-400 text-lg">Hand-picked projects flying off the shelf</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {featuredProjects.map((project, i) => (
-                <motion.div key={project.title} variants={fadeUp} custom={i}>
-                  <GlowCard>
-                    <div className={`h-32 rounded-xl bg-gradient-to-br ${project.gradient} mb-5 flex items-center justify-center relative overflow-hidden`}>
-                      <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '20px 20px' }} />
-                      <Code2 className="h-10 w-10 text-white/80" />
-                    </div>
-                    <h3 className="text-xl font-display font-semibold text-gray-900 dark:text-white mb-3">{project.title}</h3>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tech.map(t => (
-                        <span key={t} className="px-2.5 py-1 rounded-full bg-accent-blue/10 dark:bg-accent-cyan/10 text-accent-blue dark:text-accent-cyan text-xs border border-accent-blue/20 dark:border-accent-cyan/20">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold gradient-text font-display">{project.price}</span>
-                      <span className="text-accent-gold text-sm">★ {project.rating}</span>
-                    </div>
-                  </GlowCard>
+                <motion.div
+                  key={project.title}
+                  variants={fadeUp}
+                  custom={i}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <Link href="/projects" className="block group">
+                    <GlowCard className="p-0 overflow-hidden">
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                        <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 text-accent-gold text-xs font-medium flex items-center gap-1">
+                          ★ {project.rating}
+                        </div>
+                        <div className="absolute bottom-3 left-4">
+                          <h3 className="text-xl font-display font-bold text-white drop-shadow-lg">{project.title}</h3>
+                        </div>
+                      </div>
+                      <div className="p-5">
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.tech.map(t => (
+                            <span key={t} className="px-2.5 py-1 rounded-full bg-accent-blue/10 dark:bg-accent-cyan/10 text-accent-blue dark:text-accent-cyan text-xs border border-accent-blue/20 dark:border-accent-cyan/20">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-2xl font-bold bg-gradient-to-r from-neon-green via-accent-cyan to-neon-blue bg-clip-text text-transparent font-display">{project.price}</span>
+                          <span className="text-xs text-gray-400 dark:text-gray-500 group-hover:text-accent-blue dark:group-hover:text-accent-cyan transition-colors">View Details →</span>
+                        </div>
+                      </div>
+                    </GlowCard>
+                  </Link>
                 </motion.div>
               ))}
             </div>
