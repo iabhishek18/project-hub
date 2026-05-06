@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function Navbar() {
-  const { user, isAuthenticated, logout } = useAuthStore();
+  const { user, isAuthenticated, isHydrated, logout } = useAuthStore();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -19,6 +19,7 @@ export function Navbar() {
   }, []);
 
   const dashboardLink = user?.role === UserRole.ADMIN ? '/dashboard/admin' : '/dashboard/buyer';
+  const showAuth = isHydrated && isAuthenticated;
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-surface/90 backdrop-blur-xl shadow-[0_1px_0_rgba(0,245,212,0.1)]' : 'bg-transparent'}`}>
@@ -33,14 +34,14 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center gap-8">
             <NavLink href="/projects">Projects</NavLink>
-            {isAuthenticated && user?.role !== UserRole.ADMIN && (
+            {showAuth && user?.role !== UserRole.ADMIN && (
               <NavLink href="/request">Custom Request</NavLink>
             )}
             <NavLink href="/contact">Contact</NavLink>
           </div>
 
           <div className="hidden md:flex items-center gap-3">
-            {isAuthenticated ? (
+            {showAuth ? (
               <>
                 <Link href={dashboardLink} className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-300 hover:text-accent-cyan hover:bg-surface-100/50 transition-all">
                   <User className="h-4 w-4" />
@@ -78,11 +79,11 @@ export function Navbar() {
           >
             <div className="px-4 py-4 space-y-3">
               <MobileLink href="/projects" onClick={() => setMobileOpen(false)}>Projects</MobileLink>
-              {isAuthenticated && user?.role !== UserRole.ADMIN && (
+              {showAuth && user?.role !== UserRole.ADMIN && (
                 <MobileLink href="/request" onClick={() => setMobileOpen(false)}>Custom Request</MobileLink>
               )}
               <MobileLink href="/contact" onClick={() => setMobileOpen(false)}>Contact</MobileLink>
-              {isAuthenticated ? (
+              {showAuth ? (
                 <>
                   <MobileLink href={dashboardLink} onClick={() => setMobileOpen(false)}>Dashboard</MobileLink>
                   <button onClick={() => { logout(); setMobileOpen(false); }} className="w-full text-left px-3 py-2 text-accent-pink text-sm">
