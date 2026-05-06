@@ -44,11 +44,11 @@ export default function ContactPage() {
         <div className="glass p-6">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-400 mb-1">Subject</label>
+              <label htmlFor="subject" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Subject</label>
               <input id="subject" type="text" required minLength={3} className="input-field" placeholder="What's this about?" value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} />
             </div>
             <div>
-              <label htmlFor="content" className="block text-sm font-medium text-gray-400 mb-1">Message</label>
+              <label htmlFor="content" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Message</label>
               <textarea id="content" required rows={5} minLength={10} className="input-field resize-none" placeholder="Write your message here..." value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} />
             </div>
             <button type="submit" disabled={loading} className="btn-primary w-full flex items-center justify-center gap-2">

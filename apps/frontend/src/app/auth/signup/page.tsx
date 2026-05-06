@@ -45,24 +45,24 @@ export default function SignupPage() {
         className="w-full max-w-md animate-fade-in"
       >
         <div className="glass p-8">
-          <h1 className="text-2xl font-display font-bold text-white text-center">Create Account</h1>
+          <h1 className="text-2xl font-display font-bold text-gray-900 dark:text-white text-center">Create Account</h1>
           <p className="text-gray-500 text-center mt-2">Join Project Hub today</p>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1">Full Name</label>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Full Name</label>
               <input id="name" type="text" required minLength={2} className="input-field" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Email</label>
               <input id="email" type="email" required className="input-field" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-400 mb-1">Password</label>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Password</label>
               <input id="password" type="password" required minLength={8} className="input-field" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
             </div>
             <div>
-              <label htmlFor="role" className="block text-sm font-medium text-gray-400 mb-1">I am a...</label>
+              <label htmlFor="role" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">I am a...</label>
               <select id="role" className="input-field" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value as typeof form.role })}>
                 <option value={UserRole.STUDENT}>Student</option>
                 <option value={UserRole.COLLEGE}>College / University</option>

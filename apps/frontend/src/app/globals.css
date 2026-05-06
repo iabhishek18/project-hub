@@ -6,29 +6,20 @@
 
 @layer base {
   body {
-    @apply bg-surface text-white antialiased font-body;
+    @apply bg-white text-gray-900 antialiased font-body;
     cursor: default;
   }
 
-  .light body,
-  html.light body {
-    @apply bg-white text-gray-900;
-  }
-
-  html.light {
-    --surface: #ffffff;
-    --surface-50: #f8fafc;
-    --surface-100: #f1f5f9;
-    --surface-200: #e2e8f0;
-    --surface-300: #cbd5e1;
+  html.dark body {
+    @apply bg-[#050507] text-white;
   }
 
   ::selection {
-    @apply bg-accent-cyan/30 text-white;
+    @apply bg-accent-blue/20 text-gray-900;
   }
 
-  html.light ::selection {
-    @apply bg-accent-blue/20 text-gray-900;
+  html.dark ::selection {
+    @apply bg-accent-cyan/30 text-white;
   }
 
   ::-webkit-scrollbar {
@@ -36,53 +27,93 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #050507;
-  }
-
-  html.light ::-webkit-scrollbar-track {
     background: #f1f5f9;
   }
 
+  html.dark ::-webkit-scrollbar-track {
+    background: #050507;
+  }
+
   ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  html.dark ::-webkit-scrollbar-thumb {
     @apply bg-accent-cyan/30 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+
+  html.dark ::-webkit-scrollbar-thumb:hover {
     @apply bg-accent-cyan/60;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply relative overflow-hidden bg-gradient-to-r from-accent-cyan via-neon-blue to-accent-violet text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,245,212,0.4),0_0_80px_rgba(67,97,238,0.2)] hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+    @apply relative overflow-hidden bg-gradient-to-r from-accent-cyan via-neon-blue to-accent-violet text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(67,97,238,0.3)] hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+  }
+
+  html.dark .btn-primary {
+    @apply hover:shadow-[0_0_40px_rgba(0,245,212,0.4),0_0_80px_rgba(67,97,238,0.2)];
   }
 
   .btn-secondary {
-    @apply relative bg-transparent text-white font-medium py-3 px-6 rounded-xl border border-accent-cyan/40 transition-all duration-300 hover:border-accent-cyan hover:shadow-[0_0_20px_rgba(0,245,212,0.15)] hover:bg-accent-cyan/5;
+    @apply relative bg-white text-gray-700 font-medium py-3 px-6 rounded-xl border border-gray-200 transition-all duration-300 hover:border-accent-blue hover:shadow-md hover:bg-gray-50;
+  }
+
+  html.dark .btn-secondary {
+    @apply bg-transparent text-white border-accent-cyan/40 hover:border-accent-cyan hover:shadow-[0_0_20px_rgba(0,245,212,0.15)] hover:bg-accent-cyan/5;
   }
 
   .btn-danger {
-    @apply bg-gradient-to-r from-accent-pink to-red-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-[0_0_40px_rgba(247,37,133,0.4)] hover:scale-105 active:scale-95;
+    @apply bg-gradient-to-r from-accent-pink to-red-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95;
+  }
+
+  html.dark .btn-danger {
+    @apply hover:shadow-[0_0_40px_rgba(247,37,133,0.4)];
   }
 
   .input-field {
-    @apply w-full px-4 py-3 bg-black/40 border border-accent-cyan/20 rounded-xl text-white placeholder:text-gray-600 focus:ring-2 focus:ring-accent-cyan/40 focus:border-accent-cyan/60 focus:shadow-[0_0_20px_rgba(0,245,212,0.1)] outline-none transition-all duration-300;
+    @apply w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-accent-blue/30 focus:border-accent-blue outline-none transition-all duration-300;
+  }
+
+  html.dark .input-field {
+    @apply bg-black/40 border-accent-cyan/20 text-white placeholder:text-gray-600 focus:ring-accent-cyan/40 focus:border-accent-cyan/60 focus:shadow-[0_0_20px_rgba(0,245,212,0.1)];
   }
 
   .card {
-    @apply bg-black/40 backdrop-blur-xl rounded-2xl border border-white/5 overflow-hidden;
+    @apply bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm;
+  }
+
+  html.dark .card {
+    @apply bg-black/40 backdrop-blur-xl border-white/5 shadow-none;
   }
 
   .card-glow {
-    @apply bg-black/40 backdrop-blur-xl rounded-2xl border border-white/5 overflow-hidden transition-all duration-500 hover:border-accent-cyan/40 hover:shadow-[0_0_50px_rgba(0,245,212,0.1),inset_0_0_30px_rgba(0,245,212,0.02)];
+    @apply bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm transition-all duration-500 hover:shadow-lg hover:border-accent-blue/30;
+  }
+
+  html.dark .card-glow {
+    @apply bg-black/40 backdrop-blur-xl border-white/5 shadow-none hover:border-accent-cyan/40 hover:shadow-[0_0_50px_rgba(0,245,212,0.1),inset_0_0_30px_rgba(0,245,212,0.02)];
   }
 
   .glass {
-    @apply bg-black/30 backdrop-blur-2xl border border-white/5 rounded-2xl;
+    @apply bg-gray-50/80 backdrop-blur-xl border border-gray-200 rounded-2xl;
+  }
+
+  html.dark .glass {
+    @apply bg-black/30 border-white/5;
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-accent-cyan via-neon-blue to-accent-violet bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-accent-blue via-accent-violet to-accent-pink bg-clip-text text-transparent;
+  }
+
+  html.dark .gradient-text {
+    @apply from-accent-cyan via-neon-blue to-accent-violet;
   }
 
   .neon-border {
@@ -95,7 +126,7 @@
     inset: -1px;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, #00f5d4, #4361ee, #7b2ff7, #f72585);
+    background: linear-gradient(135deg, #4361ee, #7b2ff7, #f72585, #4361ee);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -106,14 +137,26 @@
   .neon-border:hover::before {
     opacity: 1;
   }
+
+  html.dark .neon-border::before {
+    background: linear-gradient(135deg, #00f5d4, #4361ee, #7b2ff7, #f72585);
+  }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-accent-cyan to-neon-blue bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-accent-blue to-accent-violet bg-clip-text text-transparent;
+  }
+
+  html.dark .text-gradient {
+    @apply from-accent-cyan to-neon-blue;
   }
 
   .text-glow {
+    text-shadow: none;
+  }
+
+  html.dark .text-glow {
     text-shadow: 0 0 10px rgba(0, 245, 212, 0.5), 0 0 40px rgba(0, 245, 212, 0.2);
   }
 
@@ -124,6 +167,10 @@
   .animate-delay-700 { animation-delay: 700ms; }
 
   .cyber-grid {
+    background-image: none;
+  }
+
+  html.dark .cyber-grid {
     background-image:
       linear-gradient(rgba(0, 245, 212, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0, 245, 212, 0.03) 1px, transparent 1px);

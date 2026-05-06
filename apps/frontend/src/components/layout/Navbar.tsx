@@ -23,14 +23,14 @@ export function Navbar() {
   const showAuth = isHydrated && isAuthenticated;
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-surface/90 dark:bg-surface/90 backdrop-blur-xl shadow-sm dark:shadow-[0_1px_0_rgba(0,245,212,0.1)]' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 dark:bg-[#050507]/90 backdrop-blur-xl shadow-sm dark:shadow-[0_1px_0_rgba(0,245,212,0.1)]' : 'bg-transparent'}`}>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-cyan to-accent-blue flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(0,245,212,0.4)] transition-shadow">
-              <span className="text-surface font-bold text-sm">PH</span>
+              <span className="text-white font-bold text-sm">PH</span>
             </div>
-            <span className="text-lg font-display font-bold text-white">Project Hub</span>
+            <span className="text-lg font-display font-bold text-gray-900 dark:text-white">Project Hub</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
@@ -45,17 +45,17 @@ export function Navbar() {
             <ThemeToggle />
             {showAuth ? (
               <>
-                <Link href={dashboardLink} className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-300 hover:text-accent-cyan hover:bg-surface-100/50 transition-all">
+                <Link href={dashboardLink} className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-accent-blue dark:hover:text-accent-cyan hover:bg-gray-100 dark:hover:bg-surface-100/50 transition-all">
                   <User className="h-4 w-4" />
                   <span className="text-sm font-medium">{user?.name}</span>
                 </Link>
-                <button onClick={logout} className="p-2 rounded-lg text-gray-500 hover:text-accent-pink hover:bg-surface-100/50 transition-all">
+                <button onClick={logout} className="p-2 rounded-lg text-gray-400 dark:text-gray-500 hover:text-accent-pink hover:bg-gray-100 dark:hover:bg-surface-100/50 transition-all">
                   <LogOut className="h-4 w-4" />
                 </button>
               </>
             ) : (
               <>
-                <Link href="/auth/login" className="px-4 py-2 text-sm text-gray-300 hover:text-white font-medium transition-colors">
+                <Link href="/auth/login" className="px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">
                   Log In
                 </Link>
                 <Link href="/auth/signup" className="btn-primary text-sm px-5 py-2.5">
@@ -65,7 +65,7 @@ export function Navbar() {
             )}
           </div>
 
-          <button className="md:hidden p-2 text-gray-400" onClick={() => setMobileOpen(!mobileOpen)}>
+          <button className="md:hidden p-2 text-gray-500 dark:text-gray-400" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
@@ -108,16 +108,16 @@ export function Navbar() {
 
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <Link href={href} className="relative text-sm text-gray-400 hover:text-accent-cyan font-medium transition-colors group">
+    <Link href={href} className="relative text-sm text-gray-600 dark:text-gray-400 hover:text-accent-blue dark:hover:text-accent-cyan font-medium transition-colors group">
       {children}
-      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent-cyan group-hover:w-full transition-all duration-300" />
+      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent-blue dark:bg-accent-cyan group-hover:w-full transition-all duration-300" />
     </Link>
   );
 }
 
 function MobileLink({ href, children, onClick }: { href: string; children: React.ReactNode; onClick: () => void }) {
   return (
-    <Link href={href} onClick={onClick} className="block px-3 py-2 text-gray-300 hover:text-accent-cyan text-sm transition-colors">
+    <Link href={href} onClick={onClick} className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:text-accent-blue dark:hover:text-accent-cyan text-sm transition-colors">
       {children}
     </Link>
   );

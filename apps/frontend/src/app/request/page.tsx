@@ -42,16 +42,16 @@ export default function RequestPage() {
         <div className="glass p-6">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="requirements" className="block text-sm font-medium text-gray-400 mb-1">Project Requirements *</label>
+              <label htmlFor="requirements" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Project Requirements *</label>
               <textarea id="requirements" required rows={6} minLength={20} className="input-field resize-none" placeholder="Describe your project requirements in detail..." value={form.requirementDetails} onChange={(e) => setForm({ ...form, requirementDetails: e.target.value })} />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="budget" className="block text-sm font-medium text-gray-400 mb-1">Budget (INR)</label>
+                <label htmlFor="budget" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Budget (INR)</label>
                 <input id="budget" type="number" min={0} className="input-field" placeholder="e.g., 5000" value={form.budget} onChange={(e) => setForm({ ...form, budget: e.target.value })} />
               </div>
               <div>
-                <label htmlFor="deadline" className="block text-sm font-medium text-gray-400 mb-1">Preferred Deadline</label>
+                <label htmlFor="deadline" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Preferred Deadline</label>
                 <input id="deadline" type="date" className="input-field" value={form.deadline} onChange={(e) => setForm({ ...form, deadline: e.target.value })} />
               </div>
             </div>

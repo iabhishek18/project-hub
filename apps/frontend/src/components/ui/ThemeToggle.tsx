@@ -15,7 +15,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg text-gray-400 hover:text-accent-cyan hover:bg-surface-100/50 dark:hover:bg-surface-100/50 transition-all"
+      className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:text-accent-blue dark:hover:text-accent-cyan hover:bg-gray-100 dark:hover:bg-surface-100/50 transition-all"
       aria-label="Toggle theme"
     >
       {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}

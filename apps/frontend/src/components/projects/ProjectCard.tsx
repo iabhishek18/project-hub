@@ -72,32 +72,32 @@ export function ProjectCard({
         </div>
 
         <div className="p-5">
-          <h3 className="font-display font-semibold text-white group-hover:text-accent-cyan transition-colors line-clamp-1 text-lg">
+          <h3 className="font-display font-semibold text-gray-900 dark:text-white group-hover:text-accent-blue dark:group-hover:text-accent-cyan transition-colors line-clamp-1 text-lg">
             {title}
           </h3>
-          <p className="text-gray-500 text-sm mt-1.5 line-clamp-2">{description}</p>
+          <p className="text-gray-500 dark:text-gray-500 text-sm mt-1.5 line-clamp-2">{description}</p>
 
           <div className="flex flex-wrap gap-1.5 mt-3">
             {techStack.slice(0, 3).map((tech) => (
-              <span key={tech} className="px-2 py-0.5 bg-accent-cyan/5 text-accent-cyan/80 text-xs rounded-full border border-accent-cyan/10">
+              <span key={tech} className="px-2 py-0.5 bg-accent-blue/5 dark:bg-accent-cyan/5 text-accent-blue/80 dark:text-accent-cyan/80 text-xs rounded-full border border-accent-blue/10 dark:border-accent-cyan/10">
                 {tech}
               </span>
             ))}
             {techStack.length > 3 && (
-              <span className="px-2 py-0.5 bg-surface-200/50 text-gray-500 text-xs rounded-full">
+              <span className="px-2 py-0.5 bg-gray-100 dark:bg-surface-200/50 text-gray-500 text-xs rounded-full">
                 +{techStack.length - 3}
               </span>
             )}
           </div>
 
-          <div className="flex items-center justify-between mt-4 pt-3 border-t border-surface-300/30 dark:border-surface-300/30">
+          <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100 dark:border-surface-300/30">
             <span className="text-xl font-display font-bold bg-gradient-to-r from-neon-green via-accent-cyan to-neon-blue bg-clip-text text-transparent">
               ₹{Number(price).toLocaleString('en-IN')}
             </span>
             <div className="flex items-center gap-1 text-sm">
               <Star className="h-4 w-4 fill-accent-gold text-accent-gold" />
-              <span className="text-gray-400">{averageRating > 0 ? averageRating.toFixed(1) : 'New'}</span>
-              {reviewCount > 0 && <span className="text-gray-600">({reviewCount})</span>}
+              <span className="text-gray-500 dark:text-gray-400">{averageRating > 0 ? averageRating.toFixed(1) : 'New'}</span>
+              {reviewCount > 0 && <span className="text-gray-400 dark:text-gray-600">({reviewCount})</span>}
             </div>
           </div>
         </div>

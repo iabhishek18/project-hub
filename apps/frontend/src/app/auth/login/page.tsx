@@ -39,16 +39,16 @@ export default function LoginPage() {
         className="w-full max-w-md animate-fade-in"
       >
         <div className="glass p-8">
-          <h1 className="text-2xl font-display font-bold text-white text-center">Welcome Back</h1>
+          <h1 className="text-2xl font-display font-bold text-gray-900 dark:text-white text-center">Welcome Back</h1>
           <p className="text-gray-500 text-center mt-2">Log in to your account</p>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Email</label>
               <input id="email" type="email" required className="input-field" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-400 mb-1">Password</label>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Password</label>
               <input id="password" type="password" required className="input-field" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
             </div>
             <button type="submit" disabled={loading} className="btn-primary w-full">
