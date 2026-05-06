@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CursorGlow } from '@/components/ui/CursorGlow';
+import { GradientOrbs } from '@/components/ui/GradientOrbs';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -18,8 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="font-body">
+        <GradientOrbs />
         <CursorGlow />
-        <div className="min-h-screen flex flex-col relative cyber-grid">
+        <div className="min-h-screen flex flex-col relative bg-mesh-light cyber-grid">
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
