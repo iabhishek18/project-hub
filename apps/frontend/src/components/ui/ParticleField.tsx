@@ -2,10 +2,10 @@
 
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import { AdditiveBlending } from 'three';
 
 function Particles() {
-  const meshRef = useRef<THREE.Points>(null);
+  const meshRef = useRef(null!);
   const count = 200;
 
   const positions = useMemo(() => {
@@ -36,9 +36,10 @@ function Particles() {
   }, []);
 
   useFrame((state) => {
-    if (!meshRef.current) return;
-    meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.02;
-    meshRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.01) * 0.1;
+    const mesh = meshRef.current as unknown as { rotation: { x: number; y: number } } | null;
+    if (!mesh) return;
+    mesh.rotation.y = state.clock.getElapsedTime() * 0.02;
+    mesh.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.01) * 0.1;
   });
 
   return (
@@ -53,7 +54,7 @@ function Particles() {
         transparent
         opacity={0.8}
         sizeAttenuation
-        blending={THREE.AdditiveBlending}
+        blending={AdditiveBlending}
       />
     </points>
   );
