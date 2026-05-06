@@ -27,16 +27,16 @@ const featuredProjects = [
 ];
 
 const categories = [
-  { name: 'Web Development', count: 45, icon: '🌐' },
-  { name: 'Mobile Apps', count: 32, icon: '📱' },
-  { name: 'Machine Learning', count: 28, icon: '🤖' },
-  { name: 'Data Science', count: 22, icon: '📊' },
-  { name: 'Blockchain', count: 15, icon: '⛓️' },
-  { name: 'IoT Projects', count: 18, icon: '🔌' },
-  { name: 'Cloud & DevOps', count: 20, icon: '☁️' },
-  { name: 'Cybersecurity', count: 12, icon: '🛡️' },
-  { name: 'Game Dev', count: 10, icon: '🎮' },
-  { name: 'Full Stack', count: 38, icon: '⚡' },
+  { name: 'Web Development', count: 45, icon: '🌐', gradient: 'from-sky-400 to-blue-600' },
+  { name: 'Mobile Apps', count: 32, icon: '📱', gradient: 'from-green-400 to-emerald-600' },
+  { name: 'Machine Learning', count: 28, icon: '🤖', gradient: 'from-violet-400 to-purple-600' },
+  { name: 'Data Science', count: 22, icon: '📊', gradient: 'from-orange-400 to-red-500' },
+  { name: 'Blockchain', count: 15, icon: '⛓️', gradient: 'from-indigo-400 to-violet-600' },
+  { name: 'IoT Projects', count: 18, icon: '🔌', gradient: 'from-teal-400 to-cyan-600' },
+  { name: 'Cloud & DevOps', count: 20, icon: '☁️', gradient: 'from-blue-400 to-indigo-600' },
+  { name: 'Cybersecurity', count: 12, icon: '🛡️', gradient: 'from-red-400 to-rose-600' },
+  { name: 'Game Dev', count: 10, icon: '🎮', gradient: 'from-pink-400 to-fuchsia-600' },
+  { name: 'Full Stack', count: 38, icon: '⚡', gradient: 'from-amber-400 to-orange-600' },
 ];
 
 export default function HomePage() {
@@ -194,16 +194,24 @@ export default function HomePage() {
               <p className="text-gray-500 dark:text-gray-400 text-lg">Projects across every tech domain you can imagine</p>
             </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
               {categories.map((cat) => (
-                <motion.div key={cat.name} variants={fadeUp}>
+                <motion.div
+                  key={cat.name}
+                  variants={fadeUp}
+                  whileHover={{ y: -6, scale: 1.03 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
                   <Link
                     href={`/projects?category=${cat.name.toUpperCase().replace(/ /g, '_')}`}
-                    className="block p-5 rounded-2xl bg-white dark:bg-surface-50/60 border border-gray-100 dark:border-surface-300/40 hover:border-accent-blue/30 dark:hover:border-accent-cyan/30 hover:shadow-md dark:hover:shadow-none hover:bg-gray-50 dark:hover:bg-surface-100/60 transition-all duration-300 hover:scale-[1.02] group text-center"
+                    className="block p-6 rounded-2xl bg-white dark:bg-surface-50/60 border border-gray-100 dark:border-surface-300/40 hover:border-transparent hover:shadow-xl dark:hover:shadow-[0_0_40px_rgba(0,245,212,0.08)] transition-all duration-300 group text-center relative overflow-hidden"
                   >
-                    <span className="text-3xl mb-3 block">{cat.icon}</span>
-                    <span className="font-medium text-gray-800 dark:text-white text-sm group-hover:text-accent-blue dark:group-hover:text-accent-cyan transition-colors">{cat.name}</span>
-                    <span className="block text-xs text-gray-400 dark:text-gray-500 mt-1">{cat.count} projects</span>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${cat.gradient} opacity-0 group-hover:opacity-[0.06] dark:group-hover:opacity-[0.12] transition-opacity duration-500`} />
+                    <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300`}>
+                      <span className="text-3xl">{cat.icon}</span>
+                    </div>
+                    <span className="font-semibold text-gray-800 dark:text-white text-sm block group-hover:text-gray-900 dark:group-hover:text-accent-cyan transition-colors">{cat.name}</span>
+                    <span className="block text-xs text-gray-400 dark:text-gray-500 mt-1.5">{cat.count} projects</span>
                   </Link>
                 </motion.div>
               ))}
