@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { Toaster } from 'react-hot-toast';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { CursorGlow } from '@/components/ui/CursorGlow';
-import { GradientOrbs } from '@/components/ui/GradientOrbs';
+import { SplashLoader } from '@/components/ui/SplashLoader';
 import './globals.css';
+
+const CursorGlow = dynamic(() => import('@/components/ui/CursorGlow').then(m => ({ default: m.CursorGlow })), { ssr: false });
+const GradientOrbs = dynamic(() => import('@/components/ui/GradientOrbs').then(m => ({ default: m.GradientOrbs })), { ssr: false });
 
 export const metadata: Metadata = {
   title: 'Project Hub - Ship Production-Ready Projects Instantly',
@@ -19,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="font-body">
+        <SplashLoader />
         <GradientOrbs />
         <CursorGlow />
         <div className="min-h-screen flex flex-col relative bg-mesh-light cyber-grid">

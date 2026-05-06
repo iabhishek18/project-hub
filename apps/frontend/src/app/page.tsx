@@ -12,12 +12,27 @@ const HeroVisuals = dynamic(() => import('@/components/ui/HeroVisuals').then(m =
 
 const stagger = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
+};
+
+const slideFromLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
+};
+
+const slideFromRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
 const projectShowcase = [
@@ -138,6 +153,7 @@ export default function HomePage() {
                         <img
                           src={project.image}
                           alt={project.title}
+                          loading="lazy"
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -191,7 +207,7 @@ export default function HomePage() {
               {codeTemplates.map((template, i) => (
                 <motion.div
                   key={template.name}
-                  variants={fadeUp}
+                  variants={i === 0 ? slideFromLeft : i === 2 ? slideFromRight : scaleIn}
                   custom={i}
                   whileHover={{ y: -6, scale: 1.01 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 25 }}
@@ -287,7 +303,7 @@ export default function HomePage() {
                 { step: '02', title: 'Purchase', desc: 'Secure checkout via Razorpay. Instant confirmation.', icon: <CreditCard className="h-6 w-6" /> },
                 { step: '03', title: 'Download', desc: 'Get immediate access to full source code & docs', icon: <Download className="h-6 w-6" /> },
               ].map((item, i) => (
-                <motion.div key={item.step} variants={fadeUp} custom={i}>
+                <motion.div key={item.step} variants={scaleIn} custom={i}>
                   <GlowCard className="text-center relative">
                     <div className="text-5xl font-display font-bold gradient-text mb-4">{item.step}</div>
                     <div className="w-12 h-12 rounded-xl bg-accent-blue/10 dark:bg-accent-cyan/10 flex items-center justify-center text-accent-blue dark:text-accent-cyan mx-auto mb-4">
@@ -312,8 +328,8 @@ export default function HomePage() {
                 { icon: <Zap className="h-7 w-7" />, title: 'Instant Access', desc: 'Download immediately after payment. No waiting.' },
                 { icon: <Shield className="h-7 w-7" />, title: 'Secure Payments', desc: 'Powered by Razorpay. Bank-grade security.' },
                 { icon: <Sparkles className="h-7 w-7" />, title: 'Custom Builds', desc: 'Need something specific? Request a custom project.' },
-              ].map((item) => (
-                <motion.div key={item.title} variants={fadeUp}>
+              ].map((item, i) => (
+                <motion.div key={item.title} variants={i % 2 === 0 ? fadeUp : scaleIn}>
                   <div className="p-6 rounded-2xl bg-white dark:bg-surface-50/40 border border-gray-100 dark:border-surface-300/30 hover:border-accent-blue/20 dark:hover:border-accent-cyan/20 hover:shadow-md dark:hover:shadow-none transition-all duration-300 group">
                     <div className="w-14 h-14 rounded-xl bg-accent-blue/10 dark:bg-accent-cyan/10 flex items-center justify-center text-accent-blue dark:text-accent-cyan mb-5 group-hover:shadow-[0_0_20px_rgba(67,97,238,0.2)] dark:group-hover:shadow-[0_0_20px_rgba(0,245,212,0.2)] transition-shadow">
                       {item.icon}
