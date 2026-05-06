@@ -11,12 +11,12 @@ const config: Config = {
     extend: {
       colors: {
         surface: {
-          DEFAULT: '#0a0a0f',
-          50: '#12121a',
-          100: '#1a1a2e',
-          200: '#22223b',
-          300: '#2d2d44',
-          400: '#3d3d56',
+          DEFAULT: '#050507',
+          50: '#0a0a12',
+          100: '#0f0f1a',
+          200: '#161625',
+          300: '#1e1e33',
+          400: '#2a2a42',
         },
         accent: {
           cyan: '#00f5d4',
@@ -29,6 +29,7 @@ const config: Config = {
           cyan: '#00f5d4',
           purple: '#b829dd',
           blue: '#3a86ff',
+          green: '#39ff14',
         },
       },
       fontFamily: {

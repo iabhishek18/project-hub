@@ -58,10 +58,11 @@ export function ProjectCard({
   const gradient = categoryGradients[category] || categoryGradients.OTHER;
 
   return (
-    <motion.div whileHover={{ y: -6 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
-      <Link href={`/projects/${id}`} className="block card-glow group">
-        <div className={`h-36 bg-gradient-to-br ${gradient} relative overflow-hidden flex items-center justify-center`}>
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '16px 16px' }} />
+    <motion.div whileHover={{ y: -8, scale: 1.02 }} transition={{ type: 'spring', stiffness: 400, damping: 25 }}>
+      <Link href={`/projects/${id}`} className="block card-glow neon-border group relative">
+        <div className={`h-40 bg-gradient-to-br ${gradient} relative overflow-hidden flex items-center justify-center`}>
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <span className="text-white/90 font-display font-bold text-lg">{categoryLabels[category]}</span>
         </div>
 

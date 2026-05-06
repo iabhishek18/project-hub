@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
-import { ArrowRight, Code2, Zap, Shield, Sparkles, Rocket, Download, CreditCard } from 'lucide-react';
+import { ArrowRight, Code2, Zap, Shield, Sparkles, Rocket, Download, CreditCard, Terminal } from 'lucide-react';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { GlowCard } from '@/components/ui/GlowCard';
+import { GlitchText } from '@/components/ui/GlitchText';
 
 const ParticleField = dynamic(() => import('@/components/ui/ParticleField').then(m => ({ default: m.ParticleField })), { ssr: false });
 
@@ -59,26 +60,42 @@ export default function HomePage() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan text-sm font-medium mb-8"
             >
               <Sparkles className="h-4 w-4" />
-              500+ Projects Sold
+              500+ Projects Shipped
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] mb-6">
               <span className="text-white">Ship </span>
-              <span className="gradient-text">Production-Ready</span>
+              <span className="gradient-text text-glow">Production-Ready</span>
               <br />
               <span className="text-white">Projects. </span>
-              <span className="text-accent-cyan">Instantly.</span>
+              <motion.span 
+                className="text-accent-cyan text-glow"
+                animate={{ opacity: [1, 0.7, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                Instantly.
+              </motion.span>
             </h1>
 
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10"
+              className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-4"
             >
               Curated academic & industry projects built with modern stacks.
               For students, colleges, and companies who ship fast.
             </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="inline-flex items-center gap-2 text-sm text-accent-cyan/70 font-mono mb-10"
+            >
+              <Terminal className="h-4 w-4" />
+              <GlitchText text="npm install your-next-project" className="text-accent-cyan/70" />
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}

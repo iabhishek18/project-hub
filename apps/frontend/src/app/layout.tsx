@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { CursorGlow } from '@/components/ui/CursorGlow';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -17,7 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="font-body">
-        <div className="min-h-screen flex flex-col relative">
+        <CursorGlow />
+        <div className="min-h-screen flex flex-col relative cyber-grid">
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
@@ -26,9 +28,10 @@ export default function RootLayout({
           position="top-right"
           toastOptions={{
             style: {
-              background: '#1a1a2e',
+              background: '#0f0f1a',
               color: '#fff',
-              border: '1px solid rgba(255,255,255,0.1)',
+              border: '1px solid rgba(0,245,212,0.2)',
+              boxShadow: '0 0 20px rgba(0,245,212,0.1)',
             },
           }}
         />
