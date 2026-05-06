@@ -38,7 +38,7 @@ export function GlowCard({ children, className = '' }: GlowCardProps) {
       animate={{ rotateX, rotateY }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       style={{ transformStyle: 'preserve-3d' }}
-      className={`bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent-cyan/30 hover:shadow-[0_0_40px_rgba(0,245,212,0.08)] transition-colors duration-500 ${className}`}
+      className={`bg-white dark:bg-white/5 backdrop-blur-xl border border-gray-100 dark:border-white/10 rounded-2xl p-6 hover:border-accent-blue/30 dark:hover:border-accent-cyan/30 hover:shadow-lg dark:hover:shadow-[0_0_40px_rgba(0,245,212,0.08)] transition-all duration-500 ${className}`}
     >
       {children}
     </motion.div>

@@ -44,10 +44,10 @@ export function AnimatedCounter({ value, suffix = '', prefix = '', label }: Anim
       transition={{ duration: 0.5 }}
       className="text-center"
     >
-      <div className="text-4xl md:text-5xl font-display font-bold text-gradient mb-2">
+      <div className="text-4xl md:text-5xl font-display font-bold gradient-text mb-2">
         {prefix}{count.toLocaleString('en-IN')}{suffix}
       </div>
-      <div className="text-gray-400 text-sm uppercase tracking-wider">{label}</div>
+      <div className="text-gray-500 dark:text-gray-400 text-sm uppercase tracking-wider">{label}</div>
     </motion.div>
   );
 }
