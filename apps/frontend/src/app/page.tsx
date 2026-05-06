@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
-import { ArrowRight, Code2, Zap, Shield, Sparkles, Rocket, Download, CreditCard, Terminal } from 'lucide-react';
+import { ArrowRight, Code2, Zap, Shield, Sparkles, Rocket, Download, CreditCard, Terminal, Star } from 'lucide-react';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { GlowCard } from '@/components/ui/GlowCard';
 import { GlitchText } from '@/components/ui/GlitchText';
 
-const CodeFlow = dynamic(() => import('@/components/ui/CodeFlow').then(m => ({ default: m.CodeFlow })), { ssr: false });
+const HeroVisuals = dynamic(() => import('@/components/ui/HeroVisuals').then(m => ({ default: m.HeroVisuals })), { ssr: false });
 
 const stagger = {
   hidden: { opacity: 0 },
@@ -20,10 +20,11 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const } },
 };
 
-const featuredProjects = [
-  { title: 'Netflix Clone', tech: ['Next.js', 'Prisma', 'Stripe'], price: '₹4,999', image: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ced95?w=600&h=400&fit=crop', rating: 4.8 },
-  { title: 'AI Image Generator', tech: ['Python', 'Stable Diffusion', 'React'], price: '₹4,499', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop', rating: 4.9 },
-  { title: 'Twitter/X Clone', tech: ['Next.js', 'tRPC', 'Pusher'], price: '₹5,999', image: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=600&h=400&fit=crop', rating: 4.7 },
+const projectShowcase = [
+  { title: 'Netflix Clone', tech: ['Next.js', 'Prisma', 'Stripe'], price: '₹4,999', image: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ced95?w=600&h=400&fit=crop', rating: 4.8, sales: 142 },
+  { title: 'AI Image Generator', tech: ['Python', 'Stable Diffusion', 'React'], price: '₹4,499', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop', rating: 4.9, sales: 98 },
+  { title: 'Twitter/X Clone', tech: ['Next.js', 'tRPC', 'Pusher'], price: '₹5,999', image: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=600&h=400&fit=crop', rating: 4.7, sales: 87 },
+  { title: 'Spotify Clone', tech: ['Next.js', 'Supabase', 'Howler'], price: '₹5,499', image: 'https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=600&h=400&fit=crop', rating: 4.8, sales: 112 },
 ];
 
 const categories = [
@@ -39,14 +40,19 @@ const categories = [
   { name: 'Full Stack', count: 38, icon: '⚡', gradient: 'from-amber-400 to-orange-600' },
 ];
 
+const codeTemplates = [
+  { name: 'REST API Starter', lang: 'TypeScript', code: 'import express from "express";\nconst app = express();\n\napp.get("/api/projects", async (req, res) => {\n  const projects = await db.project.findMany();\n  res.json({ data: projects });\n});', color: '#3178C6' },
+  { name: 'ML Model Pipeline', lang: 'Python', code: 'import tensorflow as tf\n\nmodel = tf.keras.Sequential([\n  tf.keras.layers.Dense(256, activation="relu"),\n  tf.keras.layers.Dropout(0.3),\n  tf.keras.layers.Dense(10, activation="softmax")\n])\nmodel.compile(optimizer="adam", loss="sparse_categorical_crossentropy")', color: '#3776AB' },
+  { name: 'React Component', lang: 'TSX', code: 'export function ProjectCard({ title, price, image }) {\n  return (\n    <motion.div whileHover={{ y: -8 }}>\n      <img src={image} className="rounded-xl" />\n      <h3>{title}</h3>\n      <span className="gradient-text">{price}</span>\n    </motion.div>\n  );\n}', color: '#61DAFB' },
+];
+
 export default function HomePage() {
   return (
     <div className="overflow-hidden">
       <section className="relative min-h-screen flex items-center justify-center">
-        <CodeFlow />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/90 to-white dark:from-[#050507]/50 dark:via-[#050507]/80 dark:to-[#050507] z-[1]" />
+        <HeroVisuals />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 pb-16">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -59,21 +65,14 @@ export default function HomePage() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-blue/10 dark:bg-accent-cyan/10 border border-accent-blue/20 dark:border-accent-cyan/20 text-accent-blue dark:text-accent-cyan text-sm font-medium mb-8"
             >
               <Sparkles className="h-4 w-4" />
-              500+ Projects Shipped
+              500+ Projects Shipped to 2000+ Developers
             </motion.div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] mb-6">
-              <span className="text-gray-900 dark:text-white">Ship </span>
-              <span className="gradient-text text-glow">Production-Ready</span>
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-display font-bold leading-[0.95] mb-6">
+              <span className="text-gray-900 dark:text-white">Where Code </span>
+              <span className="gradient-text text-glow">Meets</span>
               <br />
-              <span className="text-gray-900 dark:text-white">Projects. </span>
-              <motion.span
-                className="text-accent-blue dark:text-accent-cyan text-glow"
-                animate={{ opacity: [1, 0.7, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                Instantly.
-              </motion.span>
+              <span className="gradient-text text-glow">Commerce</span>
             </h1>
 
             <motion.p
@@ -82,18 +81,18 @@ export default function HomePage() {
               transition={{ delay: 0.4 }}
               className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-4"
             >
-              Curated academic & industry projects built with modern stacks.
-              For students, colleges, and companies who ship fast.
+              Production-ready projects. Battle-tested code templates.
+              From Netflix clones to AI systems — download and ship in minutes.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="inline-flex items-center gap-2 text-sm text-accent-blue/70 dark:text-accent-cyan/70 font-mono mb-10"
+              className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-accent-cyan/70 font-mono mb-10 bg-gray-100 dark:bg-black/40 px-4 py-2 rounded-lg border border-gray-200 dark:border-accent-cyan/20"
             >
               <Terminal className="h-4 w-4" />
-              <GlitchText text="npm install your-next-project" className="text-accent-blue/70 dark:text-accent-cyan/70" />
+              <GlitchText text="git clone project-hub://your-next-app" className="text-gray-500 dark:text-accent-cyan/70" />
             </motion.div>
 
             <motion.div
@@ -113,56 +112,108 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative py-24 md:py-32">
+      <section className="relative py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className="text-center mb-16">
+            <motion.div variants={fadeUp} className="text-center mb-14">
               <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-gray-900 dark:text-white">
-                <span className="gradient-text">Trending</span> This Week
+                <span className="gradient-text">Trending</span> Projects
               </h2>
-              <p className="text-gray-500 dark:text-gray-400 text-lg">Hand-picked projects flying off the shelf</p>
+              <p className="text-gray-500 dark:text-gray-400 text-lg">Loved by developers. Shipped by students. Trusted by companies.</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {featuredProjects.map((project, i) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {projectShowcase.map((project, i) => (
                 <motion.div
                   key={project.title}
                   variants={fadeUp}
                   custom={i}
-                  whileHover={{ y: -10, scale: 1.02 }}
+                  whileHover={{ y: -10, rotateY: 3, rotateX: -2 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  style={{ transformStyle: 'preserve-3d' }}
                 >
                   <Link href="/projects" className="block group">
-                    <GlowCard className="p-0 overflow-hidden">
-                      <div className="relative h-48 overflow-hidden">
+                    <div className="rounded-2xl overflow-hidden bg-white dark:bg-[#0d1117] border border-gray-200 dark:border-white/10 shadow-lg hover:shadow-2xl dark:hover:shadow-[0_20px_60px_rgba(0,245,212,0.1)] transition-all duration-500">
+                      <div className="relative h-40 overflow-hidden">
                         <img
                           src={project.image}
                           alt={project.title}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                        <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 text-accent-gold text-xs font-medium flex items-center gap-1">
-                          ★ {project.rating}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                        <div className="absolute top-2 right-2 flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/50 backdrop-blur-sm text-[10px] text-white font-medium">
+                          <Star className="h-3 w-3 fill-accent-gold text-accent-gold" />
+                          {project.rating}
                         </div>
-                        <div className="absolute bottom-3 left-4">
-                          <h3 className="text-xl font-display font-bold text-white drop-shadow-lg">{project.title}</h3>
+                        <div className="absolute bottom-2 left-3 text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                          {project.sales} sold
                         </div>
                       </div>
-                      <div className="p-5">
-                        <div className="flex flex-wrap gap-2 mb-4">
+                      <div className="p-4">
+                        <h3 className="font-display font-semibold text-gray-900 dark:text-white text-sm mb-2 group-hover:text-accent-blue dark:group-hover:text-accent-cyan transition-colors">{project.title}</h3>
+                        <div className="flex flex-wrap gap-1 mb-3">
                           {project.tech.map(t => (
-                            <span key={t} className="px-2.5 py-1 rounded-full bg-accent-blue/10 dark:bg-accent-cyan/10 text-accent-blue dark:text-accent-cyan text-xs border border-accent-blue/20 dark:border-accent-cyan/20">
-                              {t}
-                            </span>
+                            <span key={t} className="px-2 py-0.5 rounded-md bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 text-[10px] font-mono">{t}</span>
                           ))}
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-2xl font-bold bg-gradient-to-r from-neon-green via-accent-cyan to-neon-blue bg-clip-text text-transparent font-display">{project.price}</span>
-                          <span className="text-xs text-gray-400 dark:text-gray-500 group-hover:text-accent-blue dark:group-hover:text-accent-cyan transition-colors">View Details →</span>
+                          <span className="text-lg font-bold bg-gradient-to-r from-neon-green via-accent-cyan to-neon-blue bg-clip-text text-transparent font-display">{project.price}</span>
+                          <ArrowRight className="h-4 w-4 text-gray-300 dark:text-gray-600 group-hover:text-accent-blue dark:group-hover:text-accent-cyan group-hover:translate-x-1 transition-all" />
                         </div>
                       </div>
-                    </GlowCard>
+                    </div>
                   </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div variants={fadeUp} className="text-center mt-10">
+              <Link href="/projects" className="inline-flex items-center gap-2 text-accent-blue dark:text-accent-cyan font-medium hover:gap-3 transition-all">
+                View all 20+ projects <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="relative py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white dark:from-[#0a0a12] dark:to-[#050507]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div variants={fadeUp} className="text-center mb-14">
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-gray-900 dark:text-white">
+                Code <span className="gradient-text">Templates</span> Included
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400 text-lg">Every project comes with clean, documented, production-grade code</p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {codeTemplates.map((template, i) => (
+                <motion.div
+                  key={template.name}
+                  variants={fadeUp}
+                  custom={i}
+                  whileHover={{ y: -6, scale: 1.01 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                >
+                  <div className="rounded-2xl overflow-hidden bg-white dark:bg-[#0d1117] border border-gray-200 dark:border-white/10 shadow-lg hover:shadow-2xl dark:hover:shadow-[0_10px_50px_rgba(0,245,212,0.08)] transition-all duration-500">
+                    <div className="flex items-center justify-between px-4 py-3 bg-gray-50 dark:bg-[#161b22] border-b border-gray-100 dark:border-white/5">
+                      <div className="flex items-center gap-2">
+                        <div className="flex gap-1.5">
+                          <div className="w-3 h-3 rounded-full bg-red-400" />
+                          <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                          <div className="w-3 h-3 rounded-full bg-green-400" />
+                        </div>
+                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400 ml-2">{template.name}</span>
+                      </div>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border" style={{ color: template.color, borderColor: `${template.color}40` }}>
+                        {template.lang}
+                      </span>
+                    </div>
+                    <pre className="px-4 py-4 text-xs font-mono leading-relaxed text-gray-700 dark:text-gray-300 overflow-x-auto h-44">
+                      <code>{template.code}</code>
+                    </pre>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -170,13 +221,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative py-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-gray-100/50 to-gray-50 dark:from-[#050507] dark:via-surface-50/50 dark:to-[#050507]" />
+      <section className="relative py-20">
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="glass p-10 md:p-14">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <AnimatedCounter value={500} suffix="+" label="Projects" />
-              <AnimatedCounter value={2000} suffix="+" label="Students" />
+              <AnimatedCounter value={2000} suffix="+" label="Developers" />
               <AnimatedCounter value={50} suffix="+" label="Colleges" />
               <AnimatedCounter value={10} prefix="₹" suffix="L+" label="Revenue" />
             </div>
@@ -184,7 +234,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 md:py-32">
+      <section className="py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.div variants={fadeUp} className="text-center mb-14">
@@ -220,7 +270,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 md:py-32 relative">
+      <section className="py-20 md:py-28 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white dark:from-surface-50/30 dark:to-[#050507]" />
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
@@ -253,7 +303,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
