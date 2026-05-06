@@ -21,7 +21,7 @@ const fadeUp = {
 };
 
 const projectShowcase = [
-  { title: 'Netflix Clone', tech: ['Next.js', 'Prisma', 'Stripe'], price: '₹4,999', image: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=600&h=400&fit=crop', rating: 4.8, sales: 142 },
+  { title: 'Netflix Clone', tech: ['Next.js', 'Prisma', 'Stripe'], price: '₹4,999', image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop', rating: 4.8, sales: 142 },
   { title: 'AI Image Generator', tech: ['Python', 'Stable Diffusion', 'React'], price: '₹4,499', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop', rating: 4.9, sales: 98 },
   { title: 'Twitter/X Clone', tech: ['Next.js', 'tRPC', 'Pusher'], price: '₹5,999', image: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=600&h=400&fit=crop', rating: 4.7, sales: 87 },
   { title: 'Spotify Clone', tech: ['Next.js', 'Supabase', 'Howler'], price: '₹5,499', image: 'https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=600&h=400&fit=crop', rating: 4.8, sales: 112 },

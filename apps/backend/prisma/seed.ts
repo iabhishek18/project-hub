@@ -29,7 +29,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/netflix-clone.zip',
       fileKey: 'projects/netflix-clone.zip',
       isFeatured: true,
-      thumbnailUrl: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=600&h=400&fit=crop',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop',
     },
     {
       title: 'AI Resume Builder with ATS Score Checker',
@@ -67,7 +67,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/uber-clone.zip',
       fileKey: 'projects/uber-clone.zip',
       isFeatured: true,
-      thumbnailUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=400&fit=crop',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1585647347483-22b66260dfff?w=600&h=400&fit=crop',
     },
     {
       title: 'Stock Market Prediction using LSTM',
