@@ -63,14 +63,28 @@ function ProjectsContent() {
   const [sortBy, setSortBy] = useState('createdAt');
   const [showFilters, setShowFilters] = useState(false);
 
-  const fetchProjects = useCallback(async () => {
+  const fetchProjects = useCallback(async (overrides?: { page?: number; category?: string; sortBy?: string; search?: string }) => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
-      if (search) params.set('search', search);
-      if (category) params.set('category', category);
-      params.set('sortBy', sortBy);
-      params.set('page', page.toString());
+      const s = overrides?.search ?? search;
+      const c = overrides?.category ?? category;
+      const sort = overrides?.sortBy ?? sortBy;
+      const p = overrides?.page ?? page;
+
+      if (s) params.set('search', s);
+      if (c) params.set('category', c);
+      if (sort === 'price_asc') {
+        params.set('sortBy', 'price');
+        params.set('sortOrder', 'asc');
+      } else if (sort === 'price_desc') {
+        params.set('sortBy', 'price');
+        params.set('sortOrder', 'desc');
+      } else {
+        params.set('sortBy', 'createdAt');
+        params.set('sortOrder', 'desc');
+      }
+      params.set('page', p.toString());
       params.set('limit', '12');
 
       const { data } = await api.get(`/projects?${params.toString()}`);
@@ -90,7 +104,24 @@ function ProjectsContent() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
-    fetchProjects();
+    fetchProjects({ page: 1, search });
+  };
+
+  const handleCategoryChange = (newCategory: string) => {
+    setCategory(newCategory);
+    setPage(1);
+    fetchProjects({ page: 1, category: newCategory });
+  };
+
+  const handleSortChange = (newSort: string) => {
+    setSortBy(newSort);
+    setPage(1);
+    fetchProjects({ page: 1, sortBy: newSort });
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    fetchProjects({ page: newPage });
   };
 
   return (
@@ -136,7 +167,7 @@ function ProjectsContent() {
                 <select
                   className="input-field text-sm"
                   value={category}
-                  onChange={(e) => { setCategory(e.target.value); setPage(1); }}
+                  onChange={(e) => handleCategoryChange(e.target.value)}
                 >
                   {categories.map((cat) => (
                     <option key={cat.value} value={cat.value}>{cat.label}</option>
@@ -149,10 +180,11 @@ function ProjectsContent() {
                 <select
                   className="input-field text-sm"
                   value={sortBy}
-                  onChange={(e) => { setSortBy(e.target.value); setPage(1); }}
+                  onChange={(e) => handleSortChange(e.target.value)}
                 >
                   <option value="createdAt">Newest First</option>
-                  <option value="price">Price: Low to High</option>
+                  <option value="price_asc">Price: Low to High</option>
+                  <option value="price_desc">Price: High to Low</option>
                 </select>
               </div>
             </div>
@@ -192,7 +224,7 @@ function ProjectsContent() {
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                       <button
                         key={p}
-                        onClick={() => setPage(p)}
+                        onClick={() => handlePageChange(p)}
                         className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${
                           p === page
                             ? 'bg-accent-cyan text-surface'
