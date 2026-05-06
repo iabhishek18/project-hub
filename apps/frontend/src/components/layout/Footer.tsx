@@ -1,46 +1,77 @@
 import Link from 'next/link';
-import { ShoppingBag } from 'lucide-react';
+import { Github, Twitter, Linkedin } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-2">
+    <footer className="relative border-t border-surface-300/30">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-cyan/40 to-transparent" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <ShoppingBag className="h-7 w-7 text-primary-400" />
-              <span className="text-lg font-bold text-white">Project Hub</span>
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-cyan to-accent-blue flex items-center justify-center">
+                <span className="text-surface font-bold text-sm">PH</span>
+              </div>
+              <span className="text-lg font-display font-bold text-white">Project Hub</span>
             </div>
-            <p className="text-gray-400 max-w-md">
-              Your one-stop marketplace for academic and industry-ready projects.
-              Built for students, colleges, and companies.
+            <p className="text-gray-500 max-w-sm mb-6 text-sm leading-relaxed">
+              Your premium marketplace for production-ready academic and industry projects.
+              Built for developers who ship fast.
             </p>
+            <div className="flex gap-3">
+              {[
+                { icon: <Github className="h-4 w-4" />, href: '#' },
+                { icon: <Twitter className="h-4 w-4" />, href: '#' },
+                { icon: <Linkedin className="h-4 w-4" />, href: '#' },
+              ].map((social, i) => (
+                <a key={i} href={social.href} className="w-9 h-9 rounded-lg bg-surface-100 border border-surface-300/50 flex items-center justify-center text-gray-500 hover:text-accent-cyan hover:border-accent-cyan/30 transition-all">
+                  {social.icon}
+                </a>
+              ))}
+            </div>
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li><Link href="/projects" className="hover:text-white transition-colors">Browse Projects</Link></li>
-              <li><Link href="/request" className="hover:text-white transition-colors">Custom Request</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+            <h3 className="text-white font-display font-semibold mb-4 text-sm uppercase tracking-wider">Explore</h3>
+            <ul className="space-y-2.5">
+              <FooterLink href="/projects">Browse Projects</FooterLink>
+              <FooterLink href="/projects?category=WEB_DEVELOPMENT">Web Development</FooterLink>
+              <FooterLink href="/projects?category=MACHINE_LEARNING">Machine Learning</FooterLink>
+              <FooterLink href="/projects?category=MOBILE_APP">Mobile Apps</FooterLink>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-4">Categories</h3>
-            <ul className="space-y-2">
-              <li><Link href="/projects?category=WEB_DEVELOPMENT" className="hover:text-white transition-colors">Web Development</Link></li>
-              <li><Link href="/projects?category=MACHINE_LEARNING" className="hover:text-white transition-colors">Machine Learning</Link></li>
-              <li><Link href="/projects?category=MOBILE_APP" className="hover:text-white transition-colors">Mobile Apps</Link></li>
-              <li><Link href="/projects?category=DATA_SCIENCE" className="hover:text-white transition-colors">Data Science</Link></li>
+            <h3 className="text-white font-display font-semibold mb-4 text-sm uppercase tracking-wider">Support</h3>
+            <ul className="space-y-2.5">
+              <FooterLink href="/request">Custom Request</FooterLink>
+              <FooterLink href="/contact">Contact Us</FooterLink>
+              <FooterLink href="/auth/signup">Create Account</FooterLink>
+              <FooterLink href="/auth/login">Sign In</FooterLink>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} Project Hub. All rights reserved.
+        <div className="mt-12 pt-8 border-t border-surface-300/20 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-gray-600 text-xs">
+            &copy; {new Date().getFullYear()} Project Hub. All rights reserved.
+          </p>
+          <p className="text-gray-600 text-xs">
+            Built with passion and caffeine ☕
+          </p>
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <li>
+      <Link href={href} className="text-gray-500 hover:text-accent-cyan text-sm transition-colors">
+        {children}
+      </Link>
+    </li>
   );
 }

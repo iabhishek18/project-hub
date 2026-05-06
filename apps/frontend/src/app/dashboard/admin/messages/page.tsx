@@ -49,12 +49,12 @@ export default function AdminMessagesPage() {
   };
 
   if (loading) {
-    return <div className="max-w-5xl mx-auto px-4 py-8 animate-pulse"><div className="h-96 bg-gray-200 rounded-xl" /></div>;
+    return <div className="pt-20 max-w-5xl mx-auto px-4 py-8 animate-pulse"><div className="h-96 bg-surface-200/50 rounded-xl" /></div>;
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Messages ({messages.length})</h1>
+    <div className="pt-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h1 className="text-2xl font-bold text-white mb-6">Messages ({messages.length})</h1>
 
       <div className="space-y-4">
         {messages.map((msg) => (
@@ -65,15 +65,15 @@ export default function AdminMessagesPage() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="font-medium text-gray-900">{msg.user.name}</span>
-                  <span className="text-xs text-gray-500">{msg.user.email}</span>
+                  <span className="font-medium text-white">{msg.user.name}</span>
+                  <span className="text-xs text-gray-400">{msg.user.email}</span>
                   <span className="text-xs text-gray-400">{new Date(msg.createdAt).toLocaleDateString()}</span>
                 </div>
                 <h3 className="font-medium text-gray-800">{msg.subject}</h3>
                 <p className="text-gray-600 text-sm mt-1">{msg.content}</p>
 
                 {msg.reply && (
-                  <div className="mt-3 p-3 bg-green-50 rounded-lg">
+                  <div className="mt-3 p-3 bg-green-500/10 rounded-lg">
                     <p className="text-sm text-green-800"><span className="font-medium">Your reply:</span> {msg.reply}</p>
                   </div>
                 )}
@@ -94,7 +94,7 @@ export default function AdminMessagesPage() {
                         <button onClick={() => { setReplyingTo(null); setReplyText(''); }} className="btn-secondary text-sm">Cancel</button>
                       </div>
                     ) : (
-                      <button onClick={() => setReplyingTo(msg.id)} className="text-primary-600 text-sm font-medium mt-2 hover:underline">
+                      <button onClick={() => setReplyingTo(msg.id)} className="text-accent-cyan text-sm font-medium mt-2 hover:underline">
                         Reply
                       </button>
                     )}
@@ -104,7 +104,7 @@ export default function AdminMessagesPage() {
             </div>
           </div>
         ))}
-        {messages.length === 0 && <div className="text-center py-12 text-gray-500">No messages yet</div>}
+        {messages.length === 0 && <div className="text-center py-12 text-gray-400">No messages yet</div>}
       </div>
     </div>
   );

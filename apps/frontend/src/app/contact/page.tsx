@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/auth.store';
-import { Mail, MessageSquare } from 'lucide-react';
+import { MessageSquare, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function ContactPage() {
@@ -15,77 +16,52 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!isAuthenticated) {
-      router.push('/auth/login');
-      return;
-    }
-
+    if (!isAuthenticated) { router.push('/auth/login'); return; }
     setLoading(true);
     try {
       await api.post('/messages', form);
-      toast.success('Message sent! We\'ll get back to you soon.');
+      toast.success('Message sent!');
       setForm({ subject: '', content: '' });
     } catch (err: unknown) {
       const error = err as { response?: { data?: { error?: string } } };
-      toast.error(error.response?.data?.error || 'Failed to send message');
+      toast.error(error.response?.data?.error || 'Failed to send');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary-50 mb-4">
-          <MessageSquare className="h-7 w-7 text-primary-600" />
+    <div className="pt-20 max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 mb-4">
+            <MessageSquare className="h-7 w-7 text-accent-cyan" />
+          </div>
+          <h1 className="text-3xl font-display font-bold text-white">Contact Us</h1>
+          <p className="text-gray-400 mt-2">Have a question? We&apos;d love to hear from you.</p>
         </div>
-        <h1 className="text-3xl font-bold text-gray-900">Contact Us</h1>
-        <p className="text-gray-500 mt-2">Have a question? We&apos;d love to hear from you.</p>
-      </div>
 
-      <div className="card p-6">
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-            <input
-              id="subject"
-              type="text"
-              required
-              minLength={3}
-              className="input-field"
-              placeholder="What's this about?"
-              value={form.subject}
-              onChange={(e) => setForm({ ...form, subject: e.target.value })}
-            />
-          </div>
+        <div className="glass p-6">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label htmlFor="subject" className="block text-sm font-medium text-gray-400 mb-1">Subject</label>
+              <input id="subject" type="text" required minLength={3} className="input-field" placeholder="What's this about?" value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} />
+            </div>
+            <div>
+              <label htmlFor="content" className="block text-sm font-medium text-gray-400 mb-1">Message</label>
+              <textarea id="content" required rows={5} minLength={10} className="input-field resize-none" placeholder="Write your message here..." value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} />
+            </div>
+            <button type="submit" disabled={loading} className="btn-primary w-full flex items-center justify-center gap-2">
+              <Send className="h-5 w-5" />
+              {loading ? 'Sending...' : 'Send Message'}
+            </button>
+          </form>
+        </div>
 
-          <div>
-            <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-            <textarea
-              id="content"
-              required
-              rows={5}
-              minLength={10}
-              className="input-field resize-none"
-              placeholder="Write your message here..."
-              value={form.content}
-              onChange={(e) => setForm({ ...form, content: e.target.value })}
-            />
-          </div>
-
-          <button type="submit" disabled={loading} className="btn-primary w-full flex items-center justify-center gap-2">
-            <Mail className="h-5 w-5" />
-            {loading ? 'Sending...' : 'Send Message'}
-          </button>
-        </form>
-      </div>
-
-      {!isAuthenticated && (
-        <p className="text-center text-sm text-gray-500 mt-4">
-          You&apos;ll need to log in before sending a message.
-        </p>
-      )}
+        {!isAuthenticated && (
+          <p className="text-center text-sm text-gray-600 mt-4">You&apos;ll need to log in before sending a message.</p>
+        )}
+      </motion.div>
     </div>
   );
 }

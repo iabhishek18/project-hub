@@ -57,13 +57,13 @@ export default function AdminProjectsPage() {
   };
 
   if (loading) {
-    return <div className="max-w-7xl mx-auto px-4 py-8 animate-pulse"><div className="h-96 bg-gray-200 rounded-xl" /></div>;
+    return <div className="pt-20 max-w-7xl mx-auto px-4 py-8 animate-pulse"><div className="h-96 bg-surface-200/50 rounded-xl" /></div>;
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Manage Projects</h1>
+        <h1 className="text-2xl font-bold text-white">Manage Projects</h1>
         <Link href="/dashboard/admin/projects/new" className="btn-primary flex items-center gap-2">
           <Plus className="h-5 w-5" /> Add Project
         </Link>
@@ -71,22 +71,22 @@ export default function AdminProjectsPage() {
 
       <div className="card overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-surface-100/50 border-b border-surface-300/50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Title</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Category</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Price</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+              <th className="px-6 py-3 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {projects.map((project) => (
-              <tr key={project.id} className="hover:bg-gray-50">
+              <tr key={project.id} className="hover:bg-surface-100/50">
                 <td className="px-6 py-4">
-                  <span className="font-medium text-gray-900">{project.title}</span>
+                  <span className="font-medium text-white">{project.title}</span>
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-500">
+                <td className="px-6 py-4 text-sm text-gray-400">
                   {project.category.replace('_', ' ')}
                 </td>
                 <td className="px-6 py-4 text-sm font-medium">
@@ -95,19 +95,19 @@ export default function AdminProjectsPage() {
                 <td className="px-6 py-4">
                   <div className="flex gap-2">
                     {project.isFeatured && (
-                      <span className="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs rounded-full">Featured</span>
+                      <span className="px-2 py-0.5 bg-accent-gold/10 text-accent-gold text-xs rounded-full">Featured</span>
                     )}
-                    <span className={`px-2 py-0.5 text-xs rounded-full ${project.isActive ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                    <span className={`px-2 py-0.5 text-xs rounded-full ${project.isActive ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
                       {project.isActive ? 'Active' : 'Inactive'}
                     </span>
                   </div>
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end gap-2">
-                    <Link href={`/dashboard/admin/projects/${project.id}/edit`} className="p-1.5 text-gray-400 hover:text-primary-600">
+                    <Link href={`/dashboard/admin/projects/${project.id}/edit`} className="p-1.5 text-gray-400 hover:text-accent-cyan">
                       <Edit className="h-4 w-4" />
                     </Link>
-                    <button onClick={() => handleDelete(project.id)} className="p-1.5 text-gray-400 hover:text-red-600">
+                    <button onClick={() => handleDelete(project.id)} className="p-1.5 text-gray-400 hover:text-accent-pink">
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
@@ -118,7 +118,7 @@ export default function AdminProjectsPage() {
         </table>
 
         {projects.length === 0 && (
-          <div className="px-6 py-12 text-center text-gray-500">No projects yet</div>
+          <div className="px-6 py-12 text-center text-gray-400">No projects yet</div>
         )}
       </div>
     </div>

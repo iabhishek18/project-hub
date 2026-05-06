@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/auth.store';
 import { Star, Download, ShoppingCart, CheckCircle } from 'lucide-react';
@@ -107,7 +108,7 @@ export default function ProjectDetailPage() {
           }
         },
         prefill: { email: user?.email || '', name: user?.name || '' },
-        theme: { color: '#2563eb' },
+        theme: { color: '#00f5d4' },
       };
 
       const rzp = new window.Razorpay(options);
@@ -131,66 +132,73 @@ export default function ProjectDetailPage() {
 
   if (loading) {
     return (
-      <div className="max-w-5xl mx-auto px-4 py-12 animate-pulse">
-        <div className="h-8 bg-gray-200 rounded w-2/3 mb-4" />
-        <div className="h-5 bg-gray-200 rounded w-1/3 mb-8" />
-        <div className="h-64 bg-gray-200 rounded" />
+      <div className="pt-20 max-w-5xl mx-auto px-4 py-12">
+        <div className="animate-pulse space-y-4">
+          <div className="h-10 bg-surface-200/50 rounded w-2/3" />
+          <div className="h-6 bg-surface-200/50 rounded w-1/3" />
+          <div className="h-64 bg-surface-200/50 rounded-2xl mt-8" />
+        </div>
       </div>
     );
   }
 
   if (!project) {
     return (
-      <div className="max-w-5xl mx-auto px-4 py-12 text-center">
-        <h1 className="text-2xl font-bold text-gray-900">Project not found</h1>
+      <div className="pt-20 max-w-5xl mx-auto px-4 py-12 text-center">
+        <h1 className="text-2xl font-display font-bold text-white">Project not found</h1>
       </div>
     );
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="pt-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <script src="https://checkout.razorpay.com/v1/checkout.js" async />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-6">
+        <motion.div
+          className="lg:col-span-2 space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">{project.title}</h1>
-            <div className="flex items-center gap-4 mt-3">
+            <h1 className="text-3xl md:text-4xl font-display font-bold text-white">{project.title}</h1>
+            <div className="flex items-center gap-4 mt-4">
               <div className="flex items-center gap-1">
-                <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                <span className="font-medium">{project.averageRating > 0 ? project.averageRating.toFixed(1) : 'New'}</span>
+                <Star className="h-5 w-5 fill-accent-gold text-accent-gold" />
+                <span className="font-medium text-white">{project.averageRating > 0 ? project.averageRating.toFixed(1) : 'New'}</span>
                 <span className="text-gray-500">({project.reviewCount} reviews)</span>
               </div>
-              <span className="px-3 py-1 bg-primary-50 text-primary-700 text-sm rounded-full font-medium">
-                {project.category.replace('_', ' ')}
+              <span className="px-3 py-1 rounded-full bg-accent-cyan/10 text-accent-cyan text-sm border border-accent-cyan/20 font-medium">
+                {project.category.replace(/_/g, ' ')}
               </span>
             </div>
           </div>
 
-          <div className="card p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">Description</h2>
-            <p className="text-gray-600 whitespace-pre-line">{project.longDescription || project.description}</p>
+          <div className="glass p-6">
+            <h2 className="text-lg font-display font-semibold text-white mb-3">Description</h2>
+            <p className="text-gray-400 whitespace-pre-line leading-relaxed">{project.longDescription || project.description}</p>
           </div>
 
           {project.features.length > 0 && (
-            <div className="card p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-3">Features</h2>
-              <ul className="space-y-2">
+            <div className="glass p-6">
+              <h2 className="text-lg font-display font-semibold text-white mb-3">Features</h2>
+              <ul className="space-y-2.5">
                 {project.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                    <span className="text-gray-600">{feature}</span>
+                  <li key={i} className="flex items-start gap-2.5">
+                    <CheckCircle className="h-5 w-5 text-accent-cyan shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{feature}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
 
-          <div className="card p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">Tech Stack</h2>
+          <div className="glass p-6">
+            <h2 className="text-lg font-display font-semibold text-white mb-3">Tech Stack</h2>
             <div className="flex flex-wrap gap-2">
               {project.techStack.map((tech) => (
-                <span key={tech} className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium">
+                <span key={tech} className="px-3 py-1.5 rounded-lg bg-accent-cyan/10 text-accent-cyan text-sm border border-accent-cyan/20 font-medium">
                   {tech}
                 </span>
               ))}
@@ -198,34 +206,39 @@ export default function ProjectDetailPage() {
           </div>
 
           {reviews.length > 0 && (
-            <div className="card p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Reviews</h2>
+            <div className="glass p-6">
+              <h2 className="text-lg font-display font-semibold text-white mb-4">Reviews</h2>
               <div className="space-y-4">
                 {reviews.map((review) => (
-                  <div key={review.id} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+                  <div key={review.id} className="border-b border-surface-300/30 pb-4 last:border-0 last:pb-0">
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-gray-900">{review.user.name}</span>
+                      <span className="font-medium text-white">{review.user.name}</span>
                       <div className="flex">
                         {Array.from({ length: 5 }).map((_, i) => (
                           <Star
                             key={i}
-                            className={`h-4 w-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
+                            className={`h-3.5 w-3.5 ${i < review.rating ? 'fill-accent-gold text-accent-gold' : 'text-surface-300'}`}
                           />
                         ))}
                       </div>
                     </div>
-                    {review.comment && <p className="mt-1 text-gray-600 text-sm">{review.comment}</p>}
+                    {review.comment && <p className="mt-1.5 text-gray-400 text-sm">{review.comment}</p>}
                   </div>
                 ))}
               </div>
             </div>
           )}
-        </div>
+        </motion.div>
 
-        <div className="lg:col-span-1">
-          <div className="card p-6 sticky top-20">
-            <div className="text-3xl font-bold text-gray-900 mb-4">
-              &#8377;{Number(project.price).toLocaleString('en-IN')}
+        <motion.div
+          className="lg:col-span-1"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <div className="glass p-6 sticky top-24">
+            <div className="text-4xl font-display font-bold gradient-text mb-6">
+              ₹{Number(project.price).toLocaleString('en-IN')}
             </div>
 
             {project.isPurchased ? (
@@ -244,14 +257,14 @@ export default function ProjectDetailPage() {
               </button>
             )}
 
-            <div className="mt-6 text-sm text-gray-500 space-y-2">
-              <p>&#10003; Instant download after purchase</p>
-              <p>&#10003; Complete source code included</p>
-              <p>&#10003; Documentation included</p>
-              <p>&#10003; Secure payment via Razorpay</p>
+            <div className="mt-6 space-y-3 text-sm text-gray-400">
+              <p className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-accent-cyan" /> Instant download after purchase</p>
+              <p className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-accent-cyan" /> Complete source code included</p>
+              <p className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-accent-cyan" /> Documentation included</p>
+              <p className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-accent-cyan" /> Secure payment via Razorpay</p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

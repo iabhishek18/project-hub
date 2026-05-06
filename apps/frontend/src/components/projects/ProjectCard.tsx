@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import { Star } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { ProjectCategory } from '@project-hub/shared';
 
 interface ProjectCardProps {
@@ -14,7 +17,21 @@ interface ProjectCardProps {
   reviewCount: number;
 }
 
-const categoryLabels: Record<ProjectCategory, string> = {
+const categoryGradients: Record<string, string> = {
+  WEB_DEVELOPMENT: 'from-accent-cyan to-accent-blue',
+  MOBILE_APP: 'from-accent-blue to-accent-cyan',
+  MACHINE_LEARNING: 'from-accent-violet to-accent-pink',
+  DATA_SCIENCE: 'from-green-400 to-accent-cyan',
+  BLOCKCHAIN: 'from-accent-violet to-accent-gold',
+  IOT: 'from-accent-blue to-accent-violet',
+  CLOUD_COMPUTING: 'from-accent-cyan to-neon-blue',
+  CYBERSECURITY: 'from-accent-pink to-accent-violet',
+  GAME_DEVELOPMENT: 'from-accent-gold to-accent-pink',
+  DEVOPS: 'from-neon-blue to-accent-violet',
+  OTHER: 'from-gray-500 to-gray-700',
+};
+
+const categoryLabels: Record<string, string> = {
   WEB_DEVELOPMENT: 'Web Dev',
   MOBILE_APP: 'Mobile',
   MACHINE_LEARNING: 'ML/AI',
@@ -38,42 +55,47 @@ export function ProjectCard({
   averageRating,
   reviewCount,
 }: ProjectCardProps) {
+  const gradient = categoryGradients[category] || categoryGradients.OTHER;
+
   return (
-    <Link href={`/projects/${id}`} className="card group hover:shadow-md transition-shadow">
-      <div className="h-40 bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center">
-        <span className="text-primary-600 font-semibold text-lg">{categoryLabels[category]}</span>
-      </div>
-
-      <div className="p-5">
-        <h3 className="font-semibold text-gray-900 group-hover:text-primary-600 transition-colors line-clamp-1">
-          {title}
-        </h3>
-        <p className="text-gray-500 text-sm mt-1 line-clamp-2">{description}</p>
-
-        <div className="flex flex-wrap gap-1.5 mt-3">
-          {techStack.slice(0, 3).map((tech) => (
-            <span key={tech} className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">
-              {tech}
-            </span>
-          ))}
-          {techStack.length > 3 && (
-            <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">
-              +{techStack.length - 3}
-            </span>
-          )}
+    <motion.div whileHover={{ y: -6 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+      <Link href={`/projects/${id}`} className="block card-glow group">
+        <div className={`h-36 bg-gradient-to-br ${gradient} relative overflow-hidden flex items-center justify-center`}>
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '16px 16px' }} />
+          <span className="text-white/90 font-display font-bold text-lg">{categoryLabels[category]}</span>
         </div>
 
-        <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-          <span className="text-lg font-bold text-gray-900">
-            &#8377;{Number(price).toLocaleString('en-IN')}
-          </span>
-          <div className="flex items-center gap-1 text-sm text-gray-500">
-            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-            <span>{averageRating > 0 ? averageRating.toFixed(1) : 'New'}</span>
-            {reviewCount > 0 && <span>({reviewCount})</span>}
+        <div className="p-5">
+          <h3 className="font-display font-semibold text-white group-hover:text-accent-cyan transition-colors line-clamp-1 text-lg">
+            {title}
+          </h3>
+          <p className="text-gray-500 text-sm mt-1.5 line-clamp-2">{description}</p>
+
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            {techStack.slice(0, 3).map((tech) => (
+              <span key={tech} className="px-2 py-0.5 bg-accent-cyan/5 text-accent-cyan/80 text-xs rounded-full border border-accent-cyan/10">
+                {tech}
+              </span>
+            ))}
+            {techStack.length > 3 && (
+              <span className="px-2 py-0.5 bg-surface-200/50 text-gray-500 text-xs rounded-full">
+                +{techStack.length - 3}
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center justify-between mt-4 pt-3 border-t border-surface-300/30">
+            <span className="text-xl font-display font-bold gradient-text">
+              ₹{Number(price).toLocaleString('en-IN')}
+            </span>
+            <div className="flex items-center gap-1 text-sm">
+              <Star className="h-4 w-4 fill-accent-gold text-accent-gold" />
+              <span className="text-gray-400">{averageRating > 0 ? averageRating.toFixed(1) : 'New'}</span>
+              {reviewCount > 0 && <span className="text-gray-600">({reviewCount})</span>}
+            </div>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 }

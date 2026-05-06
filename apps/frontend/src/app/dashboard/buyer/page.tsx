@@ -64,11 +64,11 @@ export default function BuyerDashboard() {
 
   if (loading) {
     return (
-      <div className="max-w-5xl mx-auto px-4 py-8 animate-pulse">
-        <div className="h-8 bg-gray-200 rounded w-1/3 mb-8" />
+      <div className="pt-20 max-w-5xl mx-auto px-4 py-8 animate-pulse">
+        <div className="h-8 bg-surface-200/50 rounded w-1/3 mb-8" />
         <div className="space-y-4">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-20 bg-gray-200 rounded-xl" />
+            <div key={i} className="h-20 bg-surface-200/50 rounded-xl" />
           ))}
         </div>
       </div>
@@ -76,34 +76,34 @@ export default function BuyerDashboard() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">My Dashboard</h1>
-      <p className="text-gray-500 mb-8">Welcome back, {user?.name}</p>
+    <div className="pt-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h1 className="text-3xl font-bold text-white mb-2">My Dashboard</h1>
+      <p className="text-gray-400 mb-8">Welcome back, {user?.name}</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         <div className="card p-5 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
-            <Package className="h-5 w-5 text-blue-600" />
+          <div className="w-10 h-10 rounded-lg bg-accent-blue/10 flex items-center justify-center">
+            <Package className="h-5 w-5 text-accent-blue" />
           </div>
           <div>
-            <p className="text-sm text-gray-500">Projects Purchased</p>
-            <p className="text-xl font-bold text-gray-900">{purchases.length}</p>
+            <p className="text-sm text-gray-400">Projects Purchased</p>
+            <p className="text-xl font-bold text-white">{purchases.length}</p>
           </div>
         </div>
         <div className="card p-5 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
-            <DollarSign className="h-5 w-5 text-green-600" />
+          <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
+            <DollarSign className="h-5 w-5 text-accent-cyan" />
           </div>
           <div>
-            <p className="text-sm text-gray-500">Total Spent</p>
-            <p className="text-xl font-bold text-gray-900">₹{totalSpent.toLocaleString('en-IN')}</p>
+            <p className="text-sm text-gray-400">Total Spent</p>
+            <p className="text-xl font-bold text-white">₹{totalSpent.toLocaleString('en-IN')}</p>
           </div>
         </div>
       </div>
 
       <div className="card">
-        <div className="px-6 py-4 border-b border-gray-100">
-          <h2 className="text-lg font-semibold text-gray-900">My Purchases</h2>
+        <div className="px-6 py-4 border-b border-surface-300/30">
+          <h2 className="text-lg font-semibold text-white">My Purchases</h2>
         </div>
 
         {purchases.length > 0 ? (
@@ -111,14 +111,14 @@ export default function BuyerDashboard() {
             {purchases.map((purchase) => (
               <div key={purchase.id} className="px-6 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center">
-                    <Package className="h-6 w-6 text-primary-600" />
+                  <div className="w-12 h-12 bg-accent-cyan/10 rounded-lg flex items-center justify-center">
+                    <Package className="h-6 w-6 text-accent-cyan" />
                   </div>
                   <div>
-                    <Link href={`/projects/${purchase.project.id}`} className="font-medium text-gray-900 hover:text-primary-600">
+                    <Link href={`/projects/${purchase.project.id}`} className="font-medium text-white hover:text-accent-cyan">
                       {purchase.project.title}
                     </Link>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-400">
                       Purchased on {new Date(purchase.createdAt).toLocaleDateString()} &bull; ₹{Number(purchase.amount).toLocaleString('en-IN')}
                     </p>
                   </div>
@@ -136,7 +136,7 @@ export default function BuyerDashboard() {
         ) : (
           <div className="px-6 py-12 text-center">
             <Package className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-            <p className="text-gray-500">No purchases yet</p>
+            <p className="text-gray-400">No purchases yet</p>
             <Link href="/projects" className="btn-primary mt-4 inline-block">
               Browse Projects
             </Link>
