@@ -8,6 +8,7 @@
   body {
     @apply bg-white text-gray-900 antialiased font-body;
     cursor: default;
+    overflow-x: hidden;
   }
 
   html.dark body {

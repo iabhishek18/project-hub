@@ -29,7 +29,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/netflix-clone.zip',
       fileKey: 'projects/netflix-clone.zip',
       isFeatured: true,
-      thumbnailUrl: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ced95?w=600&h=400&fit=crop',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=600&h=400&fit=crop',
     },
     {
       title: 'AI Resume Builder with ATS Score Checker',
@@ -67,7 +67,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/uber-clone.zip',
       fileKey: 'projects/uber-clone.zip',
       isFeatured: true,
-      thumbnailUrl: 'https://images.unsplash.com/photo-1449965408869-ebd3fee7bfbd?w=600&h=400&fit=crop',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=400&fit=crop',
     },
     {
       title: 'Stock Market Prediction using LSTM',
@@ -201,7 +201,7 @@ async function main() {
       fileUrl: 'https://project-hub-files.s3.amazonaws.com/projects/discord-bot.zip',
       fileKey: 'projects/discord-bot.zip',
       isFeatured: false,
-      thumbnailUrl: 'https://images.unsplash.com/photo-1614680376408-81e91bbe261f?w=600&h=400&fit=crop',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=600&h=400&fit=crop',
     },
     {
       title: 'Hospital Management System',

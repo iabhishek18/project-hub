@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['project-hub-files.s3.amazonaws.com', 'project-hub-files.s3.ap-south-1.amazonaws.com', 'images.unsplash.com'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'project-hub-files.s3.amazonaws.com' },
+      { protocol: 'https', hostname: 'project-hub-files.s3.ap-south-1.amazonaws.com' },
+    ],
   },
 };
 
