@@ -2,11 +2,14 @@
 
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import { ProjectCategory } from '@project-hub/shared';
 import { motion } from 'framer-motion';
 import { api } from '@/lib/api';
 import { ProjectCard } from '@/components/projects/ProjectCard';
 import { Search, SlidersHorizontal } from 'lucide-react';
+
+const ParticleField3D = dynamic(() => import('@/components/ui/ParticleField3D').then(m => ({ default: m.ParticleField3D })), { ssr: false });
 
 interface Project {
   id: string;
@@ -126,6 +129,7 @@ function ProjectsContent() {
 
   return (
     <div className="pt-20 min-h-screen">
+      <ParticleField3D count={500} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

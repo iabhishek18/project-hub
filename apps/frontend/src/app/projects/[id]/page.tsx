@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/auth.store';
@@ -10,6 +11,8 @@ import { useWishlistStore } from '@/store/wishlist.store';
 import { useRecentlyViewedStore } from '@/store/recently-viewed.store';
 import { Star, Download, ShoppingCart, CheckCircle, Heart, Clock, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
+
+const ProjectDetailScene3D = dynamic(() => import('@/components/ui/ProjectDetailScene3D').then(m => ({ default: m.ProjectDetailScene3D })), { ssr: false });
 
 interface ProjectDetail {
   id: string;
@@ -464,6 +467,7 @@ export default function ProjectDetailPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="glass p-6 sticky top-24">
+            <ProjectDetailScene3D />
             <div className="text-4xl font-display font-bold bg-gradient-to-r from-neon-green via-accent-cyan to-neon-blue bg-clip-text text-transparent mb-6">
               ₹{Number(project.price).toLocaleString('en-IN')}
             </div>

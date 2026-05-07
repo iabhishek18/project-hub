@@ -9,6 +9,7 @@ import { GlowCard } from '@/components/ui/GlowCard';
 import { GlitchText } from '@/components/ui/GlitchText';
 
 const HeroVisuals = dynamic(() => import('@/components/ui/HeroVisuals').then(m => ({ default: m.HeroVisuals })), { ssr: false });
+const HeroScene3D = dynamic(() => import('@/components/ui/HeroScene3D').then(m => ({ default: m.HeroScene3D })), { ssr: false });
 
 const stagger = {
   hidden: { opacity: 0 },
@@ -65,6 +66,7 @@ export default function HomePage() {
   return (
     <div className="overflow-hidden">
       <section className="relative min-h-screen flex items-center justify-center">
+        <HeroScene3D />
         <HeroVisuals />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 pb-16">

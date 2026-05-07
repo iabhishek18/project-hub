@@ -1,7 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const SplashScene3D = dynamic(() => import('@/components/ui/SplashScene3D').then(m => ({ default: m.SplashScene3D })), { ssr: false });
 
 export function SplashLoader() {
   const [loading, setLoading] = useState(true);
@@ -25,15 +28,7 @@ export function SplashLoader() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-cyan via-accent-blue to-accent-violet flex items-center justify-center">
-                <span className="text-white font-display font-bold text-xl">PH</span>
-                <motion.div
-                  className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent-cyan via-accent-blue to-accent-violet"
-                  animate={{ opacity: [0.5, 0, 0.5] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                  style={{ filter: 'blur(12px)' }}
-                />
-              </div>
+              <SplashScene3D />
             </motion.div>
 
             <motion.div
