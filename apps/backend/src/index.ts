@@ -12,6 +12,8 @@ import { reviewRouter } from './routes/review.routes';
 import { requestRouter } from './routes/request.routes';
 import { adminRouter } from './routes/admin.routes';
 import { messageRouter } from './routes/message.routes';
+import { wishlistRouter } from './routes/wishlist.routes';
+import { profileRouter } from './routes/profile.routes';
 import { errorHandler } from './middleware/error.middleware';
 
 const app = express();
@@ -40,6 +42,8 @@ app.use('/api/reviews', reviewRouter);
 app.use('/api/requests', requestRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/messages', messageRouter);
+app.use('/api/wishlist', wishlistRouter);
+app.use('/api/profile', profileRouter);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
