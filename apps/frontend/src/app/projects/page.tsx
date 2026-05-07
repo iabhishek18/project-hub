@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { api } from '@/lib/api';
 import { ProjectCard } from '@/components/projects/ProjectCard';
 import { Search, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Canvas3DErrorBoundary } from '@/components/ui/Canvas3DErrorBoundary';
 
 const ParticleField3D = dynamic(() => import('@/components/ui/ParticleField3D').then(m => ({ default: m.ParticleField3D })), { ssr: false });
 
@@ -59,22 +60,24 @@ function ProjectsContent() {
   const searchParams = useSearchParams();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState(searchParams.get('search') || '');
+  const [searchInput, setSearchInput] = useState(searchParams.get('search') || '');
+  const [activeSearch, setActiveSearch] = useState(searchParams.get('search') || '');
   const [category, setCategory] = useState(searchParams.get('category') || '');
   const [sortBy, setSortBy] = useState('createdAt');
   const [showFilters, setShowFilters] = useState(false);
-  const [trigger, setTrigger] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
+    setError(null);
+    setLoading(true);
 
     async function load() {
-      setLoading(true);
       try {
         const params = new URLSearchParams();
-        if (search) params.set('search', search);
+        if (activeSearch) params.set('search', activeSearch);
         if (category) params.set('category', category);
         if (sortBy === 'price_asc') {
           params.set('sortBy', 'price');
@@ -92,11 +95,15 @@ function ProjectsContent() {
         const { data } = await api.get(`/projects?${params.toString()}`);
         if (!cancelled) {
           setProjects(data.data);
-          setTotalPages(data.pagination.totalPages);
+          setTotalPages(data.pagination?.totalPages || 1);
+          setError(null);
         }
-      } catch {
+      } catch (err) {
         if (!cancelled) {
           setProjects([]);
+          setTotalPages(1);
+          const message = err instanceof Error ? err.message : 'Failed to load projects';
+          setError(message);
         }
       } finally {
         if (!cancelled) {
@@ -107,12 +114,12 @@ function ProjectsContent() {
 
     load();
     return () => { cancelled = true; };
-  }, [page, category, sortBy, trigger]);
+  }, [page, category, sortBy, activeSearch]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
-    setTrigger((t) => t + 1);
+    setActiveSearch(searchInput);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -127,15 +134,17 @@ function ProjectsContent() {
   };
 
   const handlePageChange = (newPage: number) => {
-    if (newPage < 1 || newPage > totalPages) return;
+    if (newPage < 1 || newPage > totalPages || newPage === page) return;
     setPage(newPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="pt-20 min-h-screen">
-      <ParticleField3D count={500} />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="pt-20 min-h-screen relative">
+      <Canvas3DErrorBoundary>
+        <ParticleField3D count={500} />
+      </Canvas3DErrorBoundary>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -153,8 +162,8 @@ function ProjectsContent() {
                 type="text"
                 placeholder="Search projects..."
                 className="input-field pl-10"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
               />
             </div>
             <button type="submit" className="btn-primary">Search</button>
@@ -213,6 +222,17 @@ function ProjectsContent() {
                   </div>
                 ))}
               </div>
+            ) : error ? (
+              <div className="text-center py-20">
+                <p className="text-red-500 text-lg mb-4">Unable to load projects</p>
+                <p className="text-gray-500 text-sm mb-6">Please make sure the server is running and try again.</p>
+                <button
+                  onClick={() => { setPage(1); setActiveSearch(activeSearch + ''); }}
+                  className="btn-primary"
+                >
+                  Retry
+                </button>
+              </div>
             ) : projects.length > 0 ? (
               <>
                 <motion.div
@@ -220,7 +240,7 @@ function ProjectsContent() {
                   variants={stagger}
                   initial="hidden"
                   animate="visible"
-                  key={`page-${page}-${category}-${sortBy}`}
+                  key={`page-${page}-${category}-${sortBy}-${activeSearch}`}
                 >
                   {projects.map((project) => (
                     <motion.div key={project.id} variants={fadeUp}>

@@ -11,6 +11,7 @@ import { useWishlistStore } from '@/store/wishlist.store';
 import { useRecentlyViewedStore } from '@/store/recently-viewed.store';
 import { Star, Download, ShoppingCart, CheckCircle, Heart, Clock, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { Canvas3DErrorBoundary } from '@/components/ui/Canvas3DErrorBoundary';
 
 const ProjectDetailScene3D = dynamic(() => import('@/components/ui/ProjectDetailScene3D').then(m => ({ default: m.ProjectDetailScene3D })), { ssr: false });
 
@@ -467,7 +468,9 @@ export default function ProjectDetailPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="glass p-6 sticky top-24">
-            <ProjectDetailScene3D />
+            <Canvas3DErrorBoundary>
+              <ProjectDetailScene3D />
+            </Canvas3DErrorBoundary>
             <div className="text-4xl font-display font-bold bg-gradient-to-r from-neon-green via-accent-cyan to-neon-blue bg-clip-text text-transparent mb-6">
               ₹{Number(project.price).toLocaleString('en-IN')}
             </div>
