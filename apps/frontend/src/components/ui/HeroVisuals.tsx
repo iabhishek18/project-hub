@@ -14,7 +14,7 @@ const codeSnippets = [
 const floatingCards = [
   { title: 'Netflix Clone', price: '₹4,999', img: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&h=200&fit=crop' },
   { title: 'AI Chatbot', price: '₹3,499', img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&h=200&fit=crop' },
-  { title: 'Uber Clone', price: '₹7,999', img: 'https://images.unsplash.com/photo-1585647347483-22b66260dfff?w=300&h=200&fit=crop' },
+  { title: 'Uber Clone', price: '₹7,999', img: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&h=200&fit=crop' },
   { title: 'LMS Platform', price: '₹5,999', img: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=300&h=200&fit=crop' },
 ];
 
