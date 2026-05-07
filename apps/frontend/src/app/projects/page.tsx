@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { ProjectCategory } from '@project-hub/shared';
@@ -65,52 +65,54 @@ function ProjectsContent() {
   const [category, setCategory] = useState(searchParams.get('category') || '');
   const [sortBy, setSortBy] = useState('createdAt');
   const [showFilters, setShowFilters] = useState(false);
-  const fetchIdRef = useRef(0);
-
-  const fetchProjects = async (p: number, s: string, c: string, sort: string) => {
-    const fetchId = ++fetchIdRef.current;
-    setLoading(true);
-    try {
-      const params = new URLSearchParams();
-      if (s) params.set('search', s);
-      if (c) params.set('category', c);
-      if (sort === 'price_asc') {
-        params.set('sortBy', 'price');
-        params.set('sortOrder', 'asc');
-      } else if (sort === 'price_desc') {
-        params.set('sortBy', 'price');
-        params.set('sortOrder', 'desc');
-      } else {
-        params.set('sortBy', 'createdAt');
-        params.set('sortOrder', 'desc');
-      }
-      params.set('page', p.toString());
-      params.set('limit', '12');
-
-      const { data } = await api.get(`/projects?${params.toString()}`);
-
-      if (fetchId !== fetchIdRef.current) return;
-
-      setProjects(data.data);
-      setTotalPages(data.pagination.totalPages);
-    } catch {
-      if (fetchId !== fetchIdRef.current) return;
-      setProjects([]);
-    } finally {
-      if (fetchId === fetchIdRef.current) {
-        setLoading(false);
-      }
-    }
-  };
+  const [trigger, setTrigger] = useState(0);
 
   useEffect(() => {
-    fetchProjects(page, search, category, sortBy);
-  }, [page, category, sortBy]);
+    let cancelled = false;
+
+    async function load() {
+      setLoading(true);
+      try {
+        const params = new URLSearchParams();
+        if (search) params.set('search', search);
+        if (category) params.set('category', category);
+        if (sortBy === 'price_asc') {
+          params.set('sortBy', 'price');
+          params.set('sortOrder', 'asc');
+        } else if (sortBy === 'price_desc') {
+          params.set('sortBy', 'price');
+          params.set('sortOrder', 'desc');
+        } else {
+          params.set('sortBy', 'createdAt');
+          params.set('sortOrder', 'desc');
+        }
+        params.set('page', page.toString());
+        params.set('limit', '12');
+
+        const { data } = await api.get(`/projects?${params.toString()}`);
+        if (!cancelled) {
+          setProjects(data.data);
+          setTotalPages(data.pagination.totalPages);
+        }
+      } catch {
+        if (!cancelled) {
+          setProjects([]);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    load();
+    return () => { cancelled = true; };
+  }, [page, category, sortBy, trigger]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
-    fetchProjects(1, search, category, sortBy);
+    setTrigger((t) => t + 1);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
