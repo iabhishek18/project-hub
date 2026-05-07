@@ -1,9 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { Star } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Star, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ProjectCategory } from '@project-hub/shared';
+import { useAuthStore } from '@/store/auth.store';
+import { useWishlistStore } from '@/store/wishlist.store';
+import toast from 'react-hot-toast';
 
 interface ProjectCardProps {
   id: string;
@@ -56,7 +60,33 @@ export function ProjectCard({
   averageRating,
   reviewCount,
 }: ProjectCardProps) {
+  const router = useRouter();
+  const { isAuthenticated } = useAuthStore();
+  const { isWishlisted, addToWishlist, removeFromWishlist } = useWishlistStore();
   const gradient = categoryGradients[category] || categoryGradients.OTHER;
+  const wishlisted = isWishlisted(id);
+
+  const handleWishlistToggle = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!isAuthenticated) {
+      router.push('/auth/login');
+      return;
+    }
+
+    try {
+      if (wishlisted) {
+        await removeFromWishlist(id);
+        toast.success('Removed from wishlist');
+      } else {
+        await addToWishlist(id);
+        toast.success('Added to wishlist');
+      }
+    } catch {
+      toast.error('Failed to update wishlist');
+    }
+  };
 
   return (
     <motion.div whileHover={{ y: -8, scale: 1.02 }} transition={{ type: 'spring', stiffness: 400, damping: 25 }}>
@@ -69,6 +99,15 @@ export function ProjectCard({
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           <span className="absolute bottom-3 left-4 text-white/90 font-display font-semibold text-sm px-2 py-0.5 rounded-md bg-black/40 backdrop-blur-sm border border-white/10">{categoryLabels[category]}</span>
+
+          <button
+            onClick={handleWishlistToggle}
+            className="absolute top-3 right-3 p-2 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 hover:bg-black/60 transition-all z-10"
+          >
+            <Heart
+              className={`h-4 w-4 transition-colors ${wishlisted ? 'fill-red-500 text-red-500' : 'text-white/80 hover:text-red-400'}`}
+            />
+          </button>
         </div>
 
         <div className="p-5">
