@@ -108,23 +108,26 @@ function ProjectsContent() {
     e.preventDefault();
     setPage(1);
     fetchProjects({ page: 1, search });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleCategoryChange = (newCategory: string) => {
     setCategory(newCategory);
     setPage(1);
     fetchProjects({ page: 1, category: newCategory });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSortChange = (newSort: string) => {
     setSortBy(newSort);
     setPage(1);
     fetchProjects({ page: 1, sortBy: newSort });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
-    fetchProjects({ page: newPage });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -224,20 +227,34 @@ function ProjectsContent() {
                 </motion.div>
 
                 {totalPages > 1 && (
-                  <div className="flex justify-center gap-2 mt-10">
+                  <div className="flex items-center justify-center gap-2 mt-10">
+                    <button
+                      onClick={() => handlePageChange(page - 1)}
+                      disabled={page === 1}
+                      className="px-4 py-2 rounded-xl font-medium text-sm transition-all border border-gray-200 dark:border-surface-300 text-gray-600 dark:text-gray-400 hover:border-accent-blue dark:hover:border-accent-cyan/30 disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      Previous
+                    </button>
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                       <button
                         key={p}
                         onClick={() => handlePageChange(p)}
                         className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${
                           p === page
-                            ? 'bg-accent-cyan text-surface'
-                            : 'bg-surface-100 text-gray-400 border border-surface-300 hover:border-accent-cyan/30'
+                            ? 'bg-accent-blue dark:bg-accent-cyan text-white dark:text-surface shadow-md'
+                            : 'bg-gray-100 dark:bg-surface-100 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-surface-300 hover:border-accent-blue dark:hover:border-accent-cyan/30'
                         }`}
                       >
                         {p}
                       </button>
                     ))}
+                    <button
+                      onClick={() => handlePageChange(page + 1)}
+                      disabled={page === totalPages}
+                      className="px-4 py-2 rounded-xl font-medium text-sm transition-all border border-gray-200 dark:border-surface-300 text-gray-600 dark:text-gray-400 hover:border-accent-blue dark:hover:border-accent-cyan/30 disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      Next
+                    </button>
                   </div>
                 )}
               </>
