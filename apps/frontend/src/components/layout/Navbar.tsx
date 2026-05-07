@@ -2,14 +2,16 @@
 
 import Link from 'next/link';
 import { useAuthStore } from '@/store/auth.store';
+import { useWishlistStore } from '@/store/wishlist.store';
 import { UserRole } from '@project-hub/shared';
-import { Menu, X, LogOut, User } from 'lucide-react';
+import { Menu, X, LogOut, User, Heart } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export function Navbar() {
   const { user, isAuthenticated, isHydrated, logout } = useAuthStore();
+  const { items, fetchWishlist, isLoaded } = useWishlistStore();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -19,8 +21,15 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isAuthenticated && !isLoaded) {
+      fetchWishlist();
+    }
+  }, [isAuthenticated, isLoaded, fetchWishlist]);
+
   const dashboardLink = user?.role === UserRole.ADMIN ? '/dashboard/admin' : '/dashboard/buyer';
   const showAuth = isHydrated && isAuthenticated;
+  const isBuyer = showAuth && user?.role !== UserRole.ADMIN;
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 dark:bg-[#050507]/90 backdrop-blur-xl shadow-sm dark:shadow-[0_1px_0_rgba(0,245,212,0.1)]' : 'bg-transparent'}`}>
@@ -35,17 +44,25 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center gap-8">
             <NavLink href="/projects">Projects</NavLink>
-            {showAuth && user?.role !== UserRole.ADMIN && (
-              <NavLink href="/request">Custom Request</NavLink>
-            )}
+            {isBuyer && <NavLink href="/request">Custom Request</NavLink>}
             <NavLink href="/contact">Contact</NavLink>
           </div>
 
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
+            {isBuyer && (
+              <Link href="/dashboard/wishlist" className="relative p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-red-500 hover:bg-gray-100 dark:hover:bg-surface-100/50 transition-all">
+                <Heart className={`h-5 w-5 ${items.length > 0 ? 'fill-red-500 text-red-500' : ''}`} />
+                {items.length > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                    {items.length > 9 ? '9+' : items.length}
+                  </span>
+                )}
+              </Link>
+            )}
             {showAuth ? (
               <>
-                <Link href={dashboardLink} className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-accent-blue dark:hover:text-accent-cyan hover:bg-gray-100 dark:hover:bg-surface-100/50 transition-all">
+                <Link href="/profile" className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-accent-blue dark:hover:text-accent-cyan hover:bg-gray-100 dark:hover:bg-surface-100/50 transition-all">
                   <User className="h-4 w-4" />
                   <span className="text-sm font-medium">{user?.name}</span>
                 </Link>
@@ -81,12 +98,18 @@ export function Navbar() {
           >
             <div className="px-4 py-4 space-y-3">
               <MobileLink href="/projects" onClick={() => setMobileOpen(false)}>Projects</MobileLink>
-              {showAuth && user?.role !== UserRole.ADMIN && (
-                <MobileLink href="/request" onClick={() => setMobileOpen(false)}>Custom Request</MobileLink>
+              {isBuyer && (
+                <>
+                  <MobileLink href="/request" onClick={() => setMobileOpen(false)}>Custom Request</MobileLink>
+                  <MobileLink href="/dashboard/wishlist" onClick={() => setMobileOpen(false)}>
+                    Wishlist {items.length > 0 && `(${items.length})`}
+                  </MobileLink>
+                </>
               )}
               <MobileLink href="/contact" onClick={() => setMobileOpen(false)}>Contact</MobileLink>
               {showAuth ? (
                 <>
+                  <MobileLink href="/profile" onClick={() => setMobileOpen(false)}>Profile</MobileLink>
                   <MobileLink href={dashboardLink} onClick={() => setMobileOpen(false)}>Dashboard</MobileLink>
                   <button onClick={() => { logout(); setMobileOpen(false); }} className="w-full text-left px-3 py-2 text-accent-pink text-sm">
                     Logout
