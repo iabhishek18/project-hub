@@ -7,7 +7,7 @@ import { ProjectCategory } from '@project-hub/shared';
 import { motion } from 'framer-motion';
 import { api } from '@/lib/api';
 import { ProjectCard } from '@/components/projects/ProjectCard';
-import { Search, SlidersHorizontal } from 'lucide-react';
+import { Search, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const ParticleField3D = dynamic(() => import('@/components/ui/ParticleField3D').then(m => ({ default: m.ParticleField3D })), { ssr: false });
 
@@ -231,15 +231,15 @@ function ProjectsContent() {
                     <button
                       onClick={() => handlePageChange(page - 1)}
                       disabled={page === 1}
-                      className="px-4 py-2 rounded-xl font-medium text-sm transition-all border border-gray-200 dark:border-surface-300 text-gray-600 dark:text-gray-400 hover:border-accent-blue dark:hover:border-accent-cyan/30 disabled:opacity-40 disabled:cursor-not-allowed"
+                      className="w-10 h-10 flex items-center justify-center rounded-xl font-medium transition-all border border-gray-200 dark:border-surface-300 text-gray-600 dark:text-gray-400 hover:border-accent-blue dark:hover:border-accent-cyan/30 hover:text-accent-blue dark:hover:text-accent-cyan disabled:opacity-30 disabled:cursor-not-allowed"
                     >
-                      Previous
+                      <ChevronLeft className="h-5 w-5" />
                     </button>
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                       <button
                         key={p}
                         onClick={() => handlePageChange(p)}
-                        className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${
+                        className={`w-10 h-10 flex items-center justify-center rounded-xl font-medium text-sm transition-all ${
                           p === page
                             ? 'bg-accent-blue dark:bg-accent-cyan text-white dark:text-surface shadow-md'
                             : 'bg-gray-100 dark:bg-surface-100 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-surface-300 hover:border-accent-blue dark:hover:border-accent-cyan/30'
@@ -251,9 +251,9 @@ function ProjectsContent() {
                     <button
                       onClick={() => handlePageChange(page + 1)}
                       disabled={page === totalPages}
-                      className="px-4 py-2 rounded-xl font-medium text-sm transition-all border border-gray-200 dark:border-surface-300 text-gray-600 dark:text-gray-400 hover:border-accent-blue dark:hover:border-accent-cyan/30 disabled:opacity-40 disabled:cursor-not-allowed"
+                      className="w-10 h-10 flex items-center justify-center rounded-xl font-medium transition-all border border-gray-200 dark:border-surface-300 text-gray-600 dark:text-gray-400 hover:border-accent-blue dark:hover:border-accent-cyan/30 hover:text-accent-blue dark:hover:text-accent-cyan disabled:opacity-30 disabled:cursor-not-allowed"
                     >
-                      Next
+                      <ChevronRight className="h-5 w-5" />
                     </button>
                   </div>
                 )}
