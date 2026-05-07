@@ -37,8 +37,8 @@ export default function ContactPage() {
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 mb-4">
             <MessageSquare className="h-7 w-7 text-accent-cyan" />
           </div>
-          <h1 className="text-3xl font-display font-bold text-white">Contact Us</h1>
-          <p className="text-gray-400 mt-2">Have a question? We&apos;d love to hear from you.</p>
+          <h1 className="text-3xl font-display font-bold text-gray-900 dark:text-white">Contact Us</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">Have a question? We&apos;d love to hear from you.</p>
         </div>
 
         <div className="glass p-6">

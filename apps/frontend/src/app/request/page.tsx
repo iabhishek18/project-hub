@@ -36,8 +36,8 @@ export default function RequestPage() {
   return (
     <div className="pt-20 max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="animate-fade-in">
-        <h1 className="text-3xl font-display font-bold text-white mb-2">Request <span className="gradient-text">Custom Project</span></h1>
-        <p className="text-gray-400 mb-8">Describe your requirements and we&apos;ll build it for you.</p>
+        <h1 className="text-3xl font-display font-bold text-gray-900 dark:text-white mb-2">Request <span className="gradient-text">Custom Project</span></h1>
+        <p className="text-gray-600 dark:text-gray-400 mb-8">Describe your requirements and we&apos;ll build it for you.</p>
 
         <div className="glass p-6">
           <form onSubmit={handleSubmit} className="space-y-5">

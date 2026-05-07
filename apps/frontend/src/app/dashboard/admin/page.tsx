@@ -63,7 +63,7 @@ export default function AdminDashboard() {
   return (
     <div className="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
         <Link href="/dashboard/admin/projects/new" className="btn-primary flex items-center gap-2">
           <Plus className="h-5 w-5" /> Add Project
         </Link>
@@ -78,14 +78,14 @@ export default function AdminDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="card p-6">
-          <h2 className="text-lg font-semibold text-white mb-4">Recent Transactions</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Transactions</h2>
           {stats.recentTransactions.length > 0 ? (
             <div className="space-y-3">
               {stats.recentTransactions.map((t) => (
-                <div key={t.id} className="flex items-center justify-between py-2 border-b border-surface-300/30 last:border-0">
+                <div key={t.id} className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-surface-300/30 last:border-0">
                   <div>
-                    <p className="font-medium text-white text-sm">{t.projectTitle}</p>
-                    <p className="text-gray-400 text-xs">{t.buyerName} &bull; {new Date(t.date).toLocaleDateString()}</p>
+                    <p className="font-medium text-gray-900 dark:text-white text-sm">{t.projectTitle}</p>
+                    <p className="text-gray-500 dark:text-gray-400 text-xs">{t.buyerName} &bull; {new Date(t.date).toLocaleDateString()}</p>
                   </div>
                   <span className="font-semibold text-accent-cyan">₹{t.amount.toLocaleString('en-IN')}</span>
                 </div>
@@ -97,23 +97,23 @@ export default function AdminDashboard() {
         </div>
 
         <div className="card p-6">
-          <h2 className="text-lg font-semibold text-white mb-4">Quick Actions</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h2>
           <div className="grid grid-cols-2 gap-3">
-            <Link href="/dashboard/admin/projects" className="p-4 bg-surface-100/50 rounded-lg hover:bg-surface-100 transition-colors text-center">
-              <Package className="h-6 w-6 mx-auto text-gray-600 mb-2" />
-              <span className="text-sm font-medium text-gray-300">Manage Projects</span>
+            <Link href="/dashboard/admin/projects" className="p-4 bg-gray-50 dark:bg-surface-100/50 rounded-lg hover:bg-gray-100 dark:hover:bg-surface-100 transition-colors text-center">
+              <Package className="h-6 w-6 mx-auto text-gray-500 dark:text-gray-600 mb-2" />
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Manage Projects</span>
             </Link>
-            <Link href="/dashboard/admin/users" className="p-4 bg-surface-100/50 rounded-lg hover:bg-surface-100 transition-colors text-center">
-              <Users className="h-6 w-6 mx-auto text-gray-600 mb-2" />
-              <span className="text-sm font-medium text-gray-300">View Users</span>
+            <Link href="/dashboard/admin/users" className="p-4 bg-gray-50 dark:bg-surface-100/50 rounded-lg hover:bg-gray-100 dark:hover:bg-surface-100 transition-colors text-center">
+              <Users className="h-6 w-6 mx-auto text-gray-500 dark:text-gray-600 mb-2" />
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">View Users</span>
             </Link>
-            <Link href="/dashboard/admin/messages" className="p-4 bg-surface-100/50 rounded-lg hover:bg-surface-100 transition-colors text-center">
+            <Link href="/dashboard/admin/messages" className="p-4 bg-gray-50 dark:bg-surface-100/50 rounded-lg hover:bg-gray-100 dark:hover:bg-surface-100 transition-colors text-center">
               <span className="text-2xl">💬</span>
-              <span className="text-sm font-medium text-gray-300 block mt-1">Messages</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 block mt-1">Messages</span>
             </Link>
-            <Link href="/dashboard/admin/requests" className="p-4 bg-surface-100/50 rounded-lg hover:bg-surface-100 transition-colors text-center">
+            <Link href="/dashboard/admin/requests" className="p-4 bg-gray-50 dark:bg-surface-100/50 rounded-lg hover:bg-gray-100 dark:hover:bg-surface-100 transition-colors text-center">
               <span className="text-2xl">📋</span>
-              <span className="text-sm font-medium text-gray-300 block mt-1">Requests</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 block mt-1">Requests</span>
             </Link>
           </div>
         </div>
@@ -137,8 +137,8 @@ function StatCard({ icon, label, value, color }: { icon: React.ReactNode; label:
           {icon}
         </div>
         <div>
-          <p className="text-sm text-gray-400">{label}</p>
-          <p className="text-xl font-bold text-white">{value}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{label}</p>
+          <p className="text-xl font-bold text-gray-900 dark:text-white">{value}</p>
         </div>
       </div>
     </div>

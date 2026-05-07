@@ -63,7 +63,7 @@ export default function AdminProjectsPage() {
   return (
     <div className="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-white">Manage Projects</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Manage Projects</h1>
         <Link href="/dashboard/admin/projects/new" className="btn-primary flex items-center gap-2">
           <Plus className="h-5 w-5" /> Add Project
         </Link>
@@ -84,7 +84,7 @@ export default function AdminProjectsPage() {
             {projects.map((project) => (
               <tr key={project.id} className="hover:bg-surface-100/50">
                 <td className="px-6 py-4">
-                  <span className="font-medium text-white">{project.title}</span>
+                  <span className="font-medium text-gray-900 dark:text-white">{project.title}</span>
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-400">
                   {project.category.replace('_', ' ')}

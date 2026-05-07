@@ -54,7 +54,7 @@ export default function AdminMessagesPage() {
 
   return (
     <div className="pt-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-2xl font-bold text-white mb-6">Messages ({messages.length})</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Messages ({messages.length})</h1>
 
       <div className="space-y-4">
         {messages.map((msg) => (
@@ -65,12 +65,12 @@ export default function AdminMessagesPage() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="font-medium text-white">{msg.user.name}</span>
+                  <span className="font-medium text-gray-900 dark:text-white">{msg.user.name}</span>
                   <span className="text-xs text-gray-400">{msg.user.email}</span>
                   <span className="text-xs text-gray-400">{new Date(msg.createdAt).toLocaleDateString()}</span>
                 </div>
-                <h3 className="font-medium text-gray-800">{msg.subject}</h3>
-                <p className="text-gray-600 text-sm mt-1">{msg.content}</p>
+                <h3 className="font-medium text-gray-800 dark:text-gray-200">{msg.subject}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{msg.content}</p>
 
                 {msg.reply && (
                   <div className="mt-3 p-3 bg-green-500/10 rounded-lg">

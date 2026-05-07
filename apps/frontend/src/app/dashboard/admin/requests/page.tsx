@@ -50,7 +50,7 @@ export default function AdminRequestsPage() {
 
   return (
     <div className="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-2xl font-bold text-white mb-6">Custom Requests ({requests.length})</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Custom Requests ({requests.length})</h1>
 
       <div className="space-y-4">
         {requests.map((req) => (
@@ -58,7 +58,7 @@ export default function AdminRequestsPage() {
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="font-medium text-white">{req.user.name}</span>
+                  <span className="font-medium text-gray-900 dark:text-white">{req.user.name}</span>
                   <span className="text-xs text-gray-400">{req.user.email}</span>
                   <span className="px-2 py-0.5 bg-surface-100 text-gray-600 text-xs rounded-full">{req.user.role}</span>
                 </div>

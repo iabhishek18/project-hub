@@ -36,7 +36,7 @@ export default function AdminUsersPage() {
 
   return (
     <div className="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-2xl font-bold text-white mb-6">Users ({users.length})</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Users ({users.length})</h1>
 
       <div className="card overflow-hidden">
         <table className="w-full">
@@ -51,7 +51,7 @@ export default function AdminUsersPage() {
           <tbody className="divide-y divide-gray-100">
             {users.map((u) => (
               <tr key={u.id} className="hover:bg-surface-100/50">
-                <td className="px-6 py-4 font-medium text-white">{u.name}</td>
+                <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{u.name}</td>
                 <td className="px-6 py-4 text-sm text-gray-400">{u.email}</td>
                 <td className="px-6 py-4">
                   <span className="px-2 py-0.5 bg-accent-cyan/10 text-accent-cyan text-xs rounded-full font-medium">

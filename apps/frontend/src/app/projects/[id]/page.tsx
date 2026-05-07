@@ -271,7 +271,7 @@ export default function ProjectDetailPage() {
   if (!project) {
     return (
       <div className="pt-20 max-w-5xl mx-auto px-4 py-12 text-center">
-        <h1 className="text-2xl font-display font-bold text-white">Project not found</h1>
+        <h1 className="text-2xl font-display font-bold text-gray-900 dark:text-white">Project not found</h1>
       </div>
     );
   }
@@ -288,11 +288,11 @@ export default function ProjectDetailPage() {
           transition={{ duration: 0.5 }}
         >
           <div>
-            <h1 className="text-3xl md:text-4xl font-display font-bold text-white">{project.title}</h1>
+            <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-white">{project.title}</h1>
             <div className="flex items-center gap-4 mt-4">
               <div className="flex items-center gap-1">
                 <Star className="h-5 w-5 fill-accent-gold text-accent-gold" />
-                <span className="font-medium text-white">{project.averageRating > 0 ? project.averageRating.toFixed(1) : 'New'}</span>
+                <span className="font-medium text-gray-900 dark:text-white">{project.averageRating > 0 ? project.averageRating.toFixed(1) : 'New'}</span>
                 <span className="text-gray-500">({project.reviewCount} reviews)</span>
               </div>
               <span className="px-3 py-1 rounded-full bg-accent-cyan/10 text-accent-cyan text-sm border border-accent-cyan/20 font-medium">
@@ -302,18 +302,18 @@ export default function ProjectDetailPage() {
           </div>
 
           <div className="glass p-6">
-            <h2 className="text-lg font-display font-semibold text-white mb-3">Description</h2>
-            <p className="text-gray-400 whitespace-pre-line leading-relaxed">{project.longDescription || project.description}</p>
+            <h2 className="text-lg font-display font-semibold text-gray-900 dark:text-white mb-3">Description</h2>
+            <p className="text-gray-600 dark:text-gray-400 whitespace-pre-line leading-relaxed">{project.longDescription || project.description}</p>
           </div>
 
           {project.features.length > 0 && (
             <div className="glass p-6">
-              <h2 className="text-lg font-display font-semibold text-white mb-3">Features</h2>
+              <h2 className="text-lg font-display font-semibold text-gray-900 dark:text-white mb-3">Features</h2>
               <ul className="space-y-2.5">
                 {project.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-2.5">
                     <CheckCircle className="h-5 w-5 text-accent-cyan shrink-0 mt-0.5" />
-                    <span className="text-gray-300">{feature}</span>
+                    <span className="text-gray-700 dark:text-gray-300">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -321,7 +321,7 @@ export default function ProjectDetailPage() {
           )}
 
           <div className="glass p-6">
-            <h2 className="text-lg font-display font-semibold text-white mb-3">Tech Stack</h2>
+            <h2 className="text-lg font-display font-semibold text-gray-900 dark:text-white mb-3">Tech Stack</h2>
             <div className="flex flex-wrap gap-2">
               {project.techStack.map((tech) => (
                 <span key={tech} className="px-3 py-1.5 rounded-lg bg-accent-cyan/10 text-accent-cyan text-sm border border-accent-cyan/20 font-medium">
@@ -333,13 +333,13 @@ export default function ProjectDetailPage() {
 
           {/* Reviews Section with Rating Distribution */}
           <div className="glass p-6">
-            <h2 className="text-lg font-display font-semibold text-white mb-4">Reviews & Ratings</h2>
+            <h2 className="text-lg font-display font-semibold text-gray-900 dark:text-white mb-4">Reviews & Ratings</h2>
 
             {reviews.length > 0 && (
-              <div className="mb-6 p-4 bg-black/20 rounded-xl border border-surface-300/20">
+              <div className="mb-6 p-4 bg-gray-50 dark:bg-black/20 rounded-xl border border-gray-200 dark:border-surface-300/20">
                 <div className="flex items-center gap-6">
                   <div className="text-center">
-                    <p className="text-4xl font-display font-bold text-white">{project.averageRating.toFixed(1)}</p>
+                    <p className="text-4xl font-display font-bold text-gray-900 dark:text-white">{project.averageRating.toFixed(1)}</p>
                     <div className="flex items-center gap-0.5 mt-1">
                       {Array.from({ length: 5 }).map((_, i) => (
                         <Star key={i} className={`h-4 w-4 ${i < Math.round(project.averageRating) ? 'fill-accent-gold text-accent-gold' : 'text-surface-300'}`} />
@@ -374,9 +374,9 @@ export default function ProjectDetailPage() {
                 onSubmit={handleReviewSubmit}
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
-                className="mb-6 p-4 bg-black/20 rounded-xl border border-accent-cyan/20"
+                className="mb-6 p-4 bg-gray-50 dark:bg-black/20 rounded-xl border border-accent-cyan/20"
               >
-                <h3 className="text-sm font-medium text-white mb-3">Write a Review</h3>
+                <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-3">Write a Review</h3>
                 <div className="flex items-center gap-1 mb-3">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <button
@@ -431,7 +431,7 @@ export default function ProjectDetailPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-white text-sm">{review.user.name}</span>
+                          <span className="font-medium text-gray-900 dark:text-white text-sm">{review.user.name}</span>
                           <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium border ${roleColors[review.user.role] || 'bg-gray-500/10 text-gray-400 border-gray-500/20'}`}>
                             {roleLabels[review.user.role] || review.user.role}
                           </span>
@@ -449,7 +449,7 @@ export default function ProjectDetailPage() {
                         </div>
                       </div>
                     </div>
-                    {review.comment && <p className="mt-2 text-gray-400 text-sm ml-11">{review.comment}</p>}
+                    {review.comment && <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm ml-11">{review.comment}</p>}
                   </motion.div>
                 ))}
               </div>
@@ -500,7 +500,7 @@ export default function ProjectDetailPage() {
               {wishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
             </button>
 
-            <div className="mt-6 space-y-3 text-sm text-gray-400">
+            <div className="mt-6 space-y-3 text-sm text-gray-600 dark:text-gray-400">
               <p className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-accent-cyan" /> Instant download after purchase</p>
               <p className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-accent-cyan" /> Complete source code included</p>
               <p className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-accent-cyan" /> Documentation included</p>
@@ -518,7 +518,7 @@ export default function ProjectDetailPage() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-12"
         >
-          <h2 className="text-xl font-display font-semibold text-white mb-4 flex items-center gap-2">
+          <h2 className="text-xl font-display font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
             <Clock className="h-5 w-5 text-gray-400" /> Recently Viewed
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -533,7 +533,7 @@ export default function ProjectDetailPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 </div>
                 <div className="p-3">
-                  <h3 className="font-medium text-xs text-white line-clamp-1 group-hover:text-accent-cyan transition-colors">{item.title}</h3>
+                  <h3 className="font-medium text-xs text-gray-900 dark:text-white line-clamp-1 group-hover:text-accent-cyan transition-colors">{item.title}</h3>
                   <p className="text-xs font-bold bg-gradient-to-r from-neon-green to-accent-cyan bg-clip-text text-transparent mt-1">
                     ₹{item.price.toLocaleString('en-IN')}
                   </p>
@@ -544,7 +544,6 @@ export default function ProjectDetailPage() {
         </motion.section>
       )}
 
-      {/* Similar Projects (Recommendations) */}
       {similar.length > 0 && (
         <motion.section
           initial={{ opacity: 0, y: 20 }}
@@ -552,7 +551,7 @@ export default function ProjectDetailPage() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="mt-12"
         >
-          <h2 className="text-xl font-display font-semibold text-white mb-4">You might also like</h2>
+          <h2 className="text-xl font-display font-semibold text-gray-900 dark:text-white mb-4">You might also like</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {similar.map((item) => (
               <Link key={item.id} href={`/projects/${item.id}`} className="card-glow group p-0">
@@ -565,7 +564,7 @@ export default function ProjectDetailPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 </div>
                 <div className="p-3">
-                  <h3 className="font-medium text-sm text-white line-clamp-1 group-hover:text-accent-cyan transition-colors">{item.title}</h3>
+                  <h3 className="font-medium text-sm text-gray-900 dark:text-white line-clamp-1 group-hover:text-accent-cyan transition-colors">{item.title}</h3>
                   <div className="flex items-center justify-between mt-2">
                     <span className="text-sm font-bold bg-gradient-to-r from-neon-green to-accent-cyan bg-clip-text text-transparent">
                       ₹{Number(item.price).toLocaleString('en-IN')}

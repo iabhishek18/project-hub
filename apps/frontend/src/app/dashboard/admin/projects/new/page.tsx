@@ -55,32 +55,32 @@ export default function NewProjectPage() {
 
   return (
     <div className="pt-20 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-2xl font-bold text-white mb-6">Add New Project</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Add New Project</h1>
 
       <div className="card p-6">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-300 mb-1">Title *</label>
+            <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title *</label>
             <input id="title" type="text" required className="input-field" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-300 mb-1">Short Description *</label>
+            <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Short Description *</label>
             <textarea id="description" required rows={3} className="input-field resize-none" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
           </div>
 
           <div>
-            <label htmlFor="longDescription" className="block text-sm font-medium text-gray-300 mb-1">Detailed Description</label>
+            <label htmlFor="longDescription" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Detailed Description</label>
             <textarea id="longDescription" rows={5} className="input-field resize-none" value={form.longDescription} onChange={(e) => setForm({ ...form, longDescription: e.target.value })} />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="price" className="block text-sm font-medium text-gray-300 mb-1">Price (INR) *</label>
+              <label htmlFor="price" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Price (INR) *</label>
               <input id="price" type="number" required min={1} className="input-field" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} />
             </div>
             <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-300 mb-1">Category *</label>
+              <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category *</label>
               <select id="category" className="input-field" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value as ProjectCategory })}>
                 {categories.map((cat) => (
                   <option key={cat} value={cat}>{cat.replace('_', ' ')}</option>
@@ -90,34 +90,34 @@ export default function NewProjectPage() {
           </div>
 
           <div>
-            <label htmlFor="techStack" className="block text-sm font-medium text-gray-300 mb-1">Tech Stack * (comma-separated)</label>
+            <label htmlFor="techStack" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tech Stack * (comma-separated)</label>
             <input id="techStack" type="text" required className="input-field" placeholder="React, Node.js, PostgreSQL" value={form.techStack} onChange={(e) => setForm({ ...form, techStack: e.target.value })} />
           </div>
 
           <div>
-            <label htmlFor="features" className="block text-sm font-medium text-gray-300 mb-1">Features (one per line)</label>
+            <label htmlFor="features" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Features (one per line)</label>
             <textarea id="features" rows={4} className="input-field resize-none" placeholder="User authentication&#10;Real-time updates&#10;Admin panel" value={form.features} onChange={(e) => setForm({ ...form, features: e.target.value })} />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="fileUrl" className="block text-sm font-medium text-gray-300 mb-1">File URL (S3) *</label>
+              <label htmlFor="fileUrl" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">File URL (S3) *</label>
               <input id="fileUrl" type="url" required className="input-field" value={form.fileUrl} onChange={(e) => setForm({ ...form, fileUrl: e.target.value })} />
             </div>
             <div>
-              <label htmlFor="fileKey" className="block text-sm font-medium text-gray-300 mb-1">File Key (S3) *</label>
+              <label htmlFor="fileKey" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">File Key (S3) *</label>
               <input id="fileKey" type="text" required className="input-field" placeholder="projects/my-project.zip" value={form.fileKey} onChange={(e) => setForm({ ...form, fileKey: e.target.value })} />
             </div>
           </div>
 
           <div>
-            <label htmlFor="thumbnailUrl" className="block text-sm font-medium text-gray-300 mb-1">Thumbnail URL</label>
+            <label htmlFor="thumbnailUrl" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Thumbnail URL</label>
             <input id="thumbnailUrl" type="url" className="input-field" value={form.thumbnailUrl} onChange={(e) => setForm({ ...form, thumbnailUrl: e.target.value })} />
           </div>
 
           <div className="flex items-center gap-2">
             <input id="featured" type="checkbox" className="w-4 h-4 text-accent-cyan rounded" checked={form.isFeatured} onChange={(e) => setForm({ ...form, isFeatured: e.target.checked })} />
-            <label htmlFor="featured" className="text-sm font-medium text-gray-300">Featured Project</label>
+            <label htmlFor="featured" className="text-sm font-medium text-gray-700 dark:text-gray-300">Featured Project</label>
           </div>
 
           <div className="flex gap-3 pt-2">
