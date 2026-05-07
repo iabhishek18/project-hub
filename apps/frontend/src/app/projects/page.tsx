@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, Suspense } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { ProjectCategory } from '@project-hub/shared';
@@ -65,16 +65,13 @@ function ProjectsContent() {
   const [category, setCategory] = useState(searchParams.get('category') || '');
   const [sortBy, setSortBy] = useState('createdAt');
   const [showFilters, setShowFilters] = useState(false);
+  const fetchIdRef = useRef(0);
 
-  const fetchProjects = useCallback(async (overrides?: { page?: number; category?: string; sortBy?: string; search?: string }) => {
+  const fetchProjects = async (p: number, s: string, c: string, sort: string) => {
+    const fetchId = ++fetchIdRef.current;
     setLoading(true);
     try {
       const params = new URLSearchParams();
-      const s = overrides?.search ?? search;
-      const c = overrides?.category ?? category;
-      const sort = overrides?.sortBy ?? sortBy;
-      const p = overrides?.page ?? page;
-
       if (s) params.set('search', s);
       if (c) params.set('category', c);
       if (sort === 'price_asc') {
@@ -91,41 +88,44 @@ function ProjectsContent() {
       params.set('limit', '12');
 
       const { data } = await api.get(`/projects?${params.toString()}`);
+
+      if (fetchId !== fetchIdRef.current) return;
+
       setProjects(data.data);
       setTotalPages(data.pagination.totalPages);
     } catch {
+      if (fetchId !== fetchIdRef.current) return;
       setProjects([]);
     } finally {
-      setLoading(false);
+      if (fetchId === fetchIdRef.current) {
+        setLoading(false);
+      }
     }
-  }, [search, category, sortBy, page]);
+  };
 
   useEffect(() => {
-    fetchProjects();
-  }, [fetchProjects]);
+    fetchProjects(page, search, category, sortBy);
+  }, [page, category, sortBy]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
-    fetchProjects({ page: 1, search });
+    fetchProjects(1, search, category, sortBy);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleCategoryChange = (newCategory: string) => {
     setCategory(newCategory);
     setPage(1);
-    fetchProjects({ page: 1, category: newCategory });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSortChange = (newSort: string) => {
     setSortBy(newSort);
     setPage(1);
-    fetchProjects({ page: 1, sortBy: newSort });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handlePageChange = (newPage: number) => {
+    if (newPage < 1 || newPage > totalPages) return;
     setPage(newPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -218,6 +218,7 @@ function ProjectsContent() {
                   variants={stagger}
                   initial="hidden"
                   animate="visible"
+                  key={`page-${page}-${category}-${sortBy}`}
                 >
                   {projects.map((project) => (
                     <motion.div key={project.id} variants={fadeUp}>
