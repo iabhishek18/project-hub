@@ -5,6 +5,28 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-accent-cyan: 13 148 136;
+    --color-accent-violet: 124 58 237;
+    --color-accent-pink: 219 39 119;
+    --color-accent-blue: 67 56 202;
+    --color-neon-cyan: 13 148 136;
+    --color-neon-purple: 147 51 234;
+    --color-neon-blue: 37 99 235;
+    --color-neon-green: 5 150 105;
+  }
+
+  html.dark {
+    --color-accent-cyan: 0 245 212;
+    --color-accent-violet: 123 47 247;
+    --color-accent-pink: 247 37 133;
+    --color-accent-blue: 67 97 238;
+    --color-neon-cyan: 0 245 212;
+    --color-neon-purple: 184 41 221;
+    --color-neon-blue: 58 134 255;
+    --color-neon-green: 57 255 20;
+  }
+
   body {
     @apply bg-white text-gray-900 antialiased font-body;
     cursor: default;
@@ -54,11 +76,22 @@
 
 @layer components {
   .btn-primary {
-    @apply relative overflow-hidden bg-gradient-to-r from-accent-cyan via-neon-blue to-accent-violet text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(67,97,238,0.3)] hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+    @apply relative overflow-hidden text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+    background: linear-gradient(135deg, #4338ca, #7c3aed, #db2777);
+    box-shadow: 0 4px 15px rgba(67, 56, 202, 0.25);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.35);
   }
 
   html.dark .btn-primary {
-    @apply hover:shadow-[0_0_40px_rgba(0,245,212,0.4),0_0_80px_rgba(67,97,238,0.2)];
+    background: linear-gradient(135deg, #00f5d4, #3a86ff, #7b2ff7);
+    box-shadow: none;
+  }
+
+  html.dark .btn-primary:hover {
+    box-shadow: 0 0 40px rgba(0, 245, 212, 0.4), 0 0 80px rgba(67, 97, 238, 0.2);
   }
 
   .btn-secondary {
@@ -110,11 +143,12 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-accent-blue via-accent-violet to-accent-pink bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #4338ca, #7c3aed, #db2777);
   }
 
   html.dark .gradient-text {
-    @apply from-accent-cyan via-neon-blue to-accent-violet;
+    background-image: linear-gradient(to right, #00f5d4, #3a86ff, #7b2ff7);
   }
 
   .neon-border {
@@ -146,11 +180,12 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-accent-blue to-accent-violet bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #4338ca, #7c3aed);
   }
 
   html.dark .text-gradient {
-    @apply from-accent-cyan to-neon-blue;
+    background-image: linear-gradient(to right, #00f5d4, #3a86ff);
   }
 
   .text-glow {
@@ -180,9 +215,9 @@
 
   .bg-mesh-light {
     background:
-      radial-gradient(ellipse at 20% 50%, rgba(67, 97, 238, 0.05) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(123, 47, 247, 0.04) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 80%, rgba(0, 245, 212, 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 50%, rgba(67, 56, 202, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(13, 148, 136, 0.04) 0%, transparent 50%),
       linear-gradient(to bottom, #f8fafc, #ffffff);
   }
 

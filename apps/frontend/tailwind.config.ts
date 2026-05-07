@@ -19,17 +19,17 @@ const config: Config = {
           400: '#2a2a42',
         },
         accent: {
-          cyan: '#00f5d4',
-          violet: '#7b2ff7',
-          pink: '#f72585',
-          blue: '#4361ee',
+          cyan: 'rgb(var(--color-accent-cyan) / <alpha-value>)',
+          violet: 'rgb(var(--color-accent-violet) / <alpha-value>)',
+          pink: 'rgb(var(--color-accent-pink) / <alpha-value>)',
+          blue: 'rgb(var(--color-accent-blue) / <alpha-value>)',
           gold: '#ffd60a',
         },
         neon: {
-          cyan: '#00f5d4',
-          purple: '#b829dd',
-          blue: '#3a86ff',
-          green: '#39ff14',
+          cyan: 'rgb(var(--color-neon-cyan) / <alpha-value>)',
+          purple: 'rgb(var(--color-neon-purple) / <alpha-value>)',
+          blue: 'rgb(var(--color-neon-blue) / <alpha-value>)',
+          green: 'rgb(var(--color-neon-green) / <alpha-value>)',
         },
       },
       fontFamily: {
@@ -57,8 +57,8 @@ const config: Config = {
           '50%': { transform: 'translateY(-20px)' },
         },
         'glow': {
-          '0%': { boxShadow: '0 0 5px #00f5d4, 0 0 10px #00f5d4, 0 0 20px #00f5d4' },
-          '100%': { boxShadow: '0 0 10px #00f5d4, 0 0 20px #00f5d4, 0 0 40px #00f5d4' },
+          '0%': { boxShadow: '0 0 5px rgb(var(--color-accent-cyan)), 0 0 10px rgb(var(--color-accent-cyan)), 0 0 20px rgb(var(--color-accent-cyan))' },
+          '100%': { boxShadow: '0 0 10px rgb(var(--color-accent-cyan)), 0 0 20px rgb(var(--color-accent-cyan)), 0 0 40px rgb(var(--color-accent-cyan))' },
         },
         'gradient-x': {
           '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
