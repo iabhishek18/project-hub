@@ -38,12 +38,7 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 pt-20">
-      <div
-
-
-
-        className="w-full max-w-md animate-fade-in"
-      >
+      <div className="w-full max-w-md animate-fade-in">
         <div className="glass p-8">
           <h1 className="text-2xl font-display font-bold text-gray-900 dark:text-white text-center">Create Account</h1>
           <p className="text-gray-500 text-center mt-2">Join Project Hub today</p>
