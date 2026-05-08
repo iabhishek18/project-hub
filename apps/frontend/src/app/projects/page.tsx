@@ -68,6 +68,7 @@ function ProjectsContent() {
   const [category, setCategory] = useState(searchParams.get('category') || '');
   const [sortBy, setSortBy] = useState('createdAt');
   const [showFilters, setShowFilters] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -98,12 +99,11 @@ function ProjectsContent() {
           setTotalPages(data.pagination?.totalPages || 1);
           setError(null);
         }
-      } catch (err) {
+      } catch {
         if (!cancelled) {
           setProjects([]);
           setTotalPages(1);
-          const message = err instanceof Error ? err.message : 'Failed to load projects';
-          setError(message);
+          setError('Unable to load projects. Please ensure the backend server is running.');
         }
       } finally {
         if (!cancelled) {
@@ -114,7 +114,7 @@ function ProjectsContent() {
 
     load();
     return () => { cancelled = true; };
-  }, [page, category, sortBy, activeSearch]);
+  }, [page, category, sortBy, activeSearch, retryCount]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -227,7 +227,7 @@ function ProjectsContent() {
                 <p className="text-red-500 text-lg mb-4">Unable to load projects</p>
                 <p className="text-gray-500 text-sm mb-6">Please make sure the server is running and try again.</p>
                 <button
-                  onClick={() => { setPage(1); setActiveSearch(activeSearch + ''); }}
+                  onClick={() => setRetryCount((c) => c + 1)}
                   className="btn-primary"
                 >
                   Retry
