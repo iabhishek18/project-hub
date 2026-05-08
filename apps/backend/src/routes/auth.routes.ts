@@ -28,6 +28,19 @@ const refreshSchema = z.object({
   }),
 });
 
+const forgotPasswordSchema = z.object({
+  body: z.object({
+    email: z.string().email(),
+  }),
+});
+
+const resetPasswordSchema = z.object({
+  body: z.object({
+    token: z.string().min(1),
+    password: z.string().min(8).max(128),
+  }),
+});
+
 authRouter.post(
   '/signup',
   validate(signupSchema),
@@ -77,6 +90,34 @@ authRouter.post(
     try {
       const { refreshToken } = req.body;
       const result = await authService.refreshToken(refreshToken);
+      res.json({ success: true, data: result });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+authRouter.post(
+  '/forgot-password',
+  validate(forgotPasswordSchema),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { email } = req.body;
+      const result = await authService.forgotPassword(email);
+      res.json({ success: true, data: result });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+authRouter.post(
+  '/reset-password',
+  validate(resetPasswordSchema),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { token, password } = req.body;
+      const result = await authService.resetPassword(token, password);
       res.json({ success: true, data: result });
     } catch (err) {
       next(err);

@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 import { UserRole } from '@project-hub/shared';
 import { prisma } from '../config/database';
 import { AppError } from '../middleware/error.middleware';
@@ -103,4 +104,50 @@ export async function refreshToken(token: string) {
   const accessToken = generateAccessToken(tokenPayload);
 
   return { accessToken };
+}
+
+export async function forgotPassword(email: string) {
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user) {
+    return { message: 'If an account with that email exists, a reset link has been generated.' };
+  }
+
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  const resetTokenExpiry = new Date(Date.now() + 60 * 60 * 1000);
+
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { resetToken, resetTokenExpiry },
+  });
+
+  return {
+    message: 'If an account with that email exists, a reset link has been generated.',
+    resetToken,
+  };
+}
+
+export async function resetPassword(token: string, newPassword: string) {
+  const user = await prisma.user.findFirst({
+    where: {
+      resetToken: token,
+      resetTokenExpiry: { gt: new Date() },
+    },
+  });
+
+  if (!user) {
+    throw new AppError(400, 'Invalid or expired reset token');
+  }
+
+  const hashedPassword = await bcrypt.hash(newPassword, 12);
+
+  await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      password: hashedPassword,
+      resetToken: null,
+      resetTokenExpiry: null,
+    },
+  });
+
+  return { message: 'Password has been reset successfully' };
 }

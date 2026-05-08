@@ -51,6 +51,9 @@ export default function LoginPage() {
               <label htmlFor="password" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Password</label>
               <input id="password" type="password" required className="input-field" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
             </div>
+            <div className="text-right">
+              <Link href="/auth/forgot-password" className="text-xs text-accent-cyan hover:underline font-medium">Forgot password?</Link>
+            </div>
             <button type="submit" disabled={loading} className="btn-primary w-full">
               {loading ? 'Logging in...' : 'Log In'}
             </button>
